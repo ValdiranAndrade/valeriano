@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta - Valeriano</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-192x192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-512x512.png" sizes="512x512" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="perfil-page">
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/Valeriano_Logo.png" alt="Valeriano Logo" class="logo-image">
+                    </a>
+                </div>
+                
+                <div class="search-icon">
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Buscar produtos">
+                        <i class="fas fa-search" onclick="performSearch()"></i>
+                    </div>
+                </div>
+                
+                <div class="nav-icons">
+                    <a href="perfil.html" class="login-icon active">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="favoritos.html" style="color: #000; text-decoration: none;"><i class="fas fa-heart"></i></a>
+                    <a href="carrinho.html" style="color: #000; text-decoration: none;"><i class="fas fa-shopping-bag"></i></a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Menu de Navegação Principal -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="main-nav-menu">
+                    <li><a href="camisetas.html">CAMISETA</a></li>
+                    <li><a href="SHORTZIN.html">SHORTS</a></li>
+                    <li><a href="casacos.html">CASACO</a></li>
+                    <li><a href="Catalogo_Boné.html">BONÉ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Profile Hero Section -->
+    <section class="profile-hero">
+        <div class="container">
+            <div class="profile-banner">
+                <h1>MINHA CONTA</h1>
+                <p>Gerencie suas informações pessoais e preferências</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Content -->
+    <section class="profile-content">
+        <div class="container">
+            <div class="profile-layout">
+                <!-- Sidebar Navigation -->
+                <div class="profile-sidebar">
+                    <nav class="profile-nav">
+                        <ul class="profile-nav-menu">
+                            <li class="active">
+                                <a href="#profile" onclick="showSection('profile')">
+                                    <i class="fas fa-user"></i>
+                                    Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#orders" onclick="showSection('orders')">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    Meus Pedidos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#addresses" onclick="showSection('addresses')">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Endereços
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#settings" onclick="showSection('settings')">
+                                    <i class="fas fa-cog"></i>
+                                    Configurações
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Main Content -->
+                <div class="profile-main">
+                    <!-- Profile Section -->
+                    <div id="profile-section" class="profile-section active">
+                        <div class="section-header">
+                            <h2>Informações Pessoais</h2>
+                            <button class="btn-edit">
+                                <i class="fas fa-edit"></i>
+                                Editar
+                            </button>
+                        </div>
+
+                        <form id="profile-form">
+                            <div class="profile-info">
+                                <div class="profile-avatar">
+                                    <div class="avatar-placeholder" id="avatarPreview">
+                                        <img id="avatarImage" src="" alt="Avatar" style="display: none;">
+                                        <i class="fas fa-user" id="avatarIcon"></i>
+                                    </div>
+                                    <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                                    <button type="button" class="btn-change-photo" onclick="document.getElementById('photoInput').click()">Alterar Foto</button>
+                                </div>
+
+                                <div class="profile-details">
+                                    <div class="form-group">
+                                        <label>Nome Completo</label>
+                                        <input type="text" name="nome" value="João Silva" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" name="email" value="joao.silva@gmail.com" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CPF</label>
+                                        <input type="text" name="cpf" value="123.456.789-00" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Telefone</label>
+                                        <input type="tel" name="telefone" value="(11) 99999-9999" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Data de Nascimento</label>
+                                        <input type="date" name="dataNascimento" value="1990-05-15" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gênero</label>
+                                        <select name="genero" readonly>
+                                            <option value="masculino" selected>Masculino</option>
+                                            <option value="feminino">Feminino</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="profile-actions">
+                            <button class="btn-save" style="display: none;">
+                                <i class="fas fa-save"></i>
+                                Salvar Alterações
+                            </button>
+                            <button class="btn-cancel" style="display: none;">
+                                <i class="fas fa-times"></i>
+                                Cancelar
+                            </button>
+                            <button class="btn-logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Sair da Conta
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Orders Section -->
+                    <div id="orders-section" class="profile-section">
+                        <div class="section-header">
+                            <h2>Meus Pedidos</h2>
+                        </div>
+
+                        <div class="orders-list">
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <div class="order-number">
+                                        <span class="label">Pedido:</span>
+                                        <span class="value">#VAL-2024-001</span>
+                                    </div>
+                                    <div class="order-date">
+                                        <span class="label">Data:</span>
+                                        <span class="value">15/01/2024</span>
+                                    </div>
+                                    <div class="order-status">
+                                        <span class="status delivered">Entregue</span>
+                                    </div>
+                                </div>
+                                <div class="order-total">
+                                    <span class="label">Total:</span>
+                                    <span class="value">R$ 299,90</span>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn-view-order">Ver Detalhes</button>
+                                </div>
+                            </div>
+
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <div class="order-number">
+                                        <span class="label">Pedido:</span>
+                                        <span class="value">#VAL-2024-002</span>
+                                    </div>
+                                    <div class="order-date">
+                                        <span class="label">Data:</span>
+                                        <span class="value">20/01/2024</span>
+                                    </div>
+                                    <div class="order-status">
+                                        <span class="status shipping">Em Trânsito</span>
+                                    </div>
+                                </div>
+                                <div class="order-total">
+                                    <span class="label">Total:</span>
+                                    <span class="value">R$ 189,90</span>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn-view-order">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Addresses Section -->
+                    <div id="addresses-section" class="profile-section">
+                        <div class="section-header">
+                            <h2>Meus Endereços</h2>
+                            <button class="btn-add-address">
+                                <i class="fas fa-plus"></i>
+                                Adicionar Endereço
+                            </button>
+                        </div>
+
+                        <form id="address-form">
+                            <div class="addresses-list">
+                                <div class="address-item">
+                                    <div class="address-info">
+                                        <h3>Endereço Principal</h3>
+                                        <div class="form-group">
+                                            <label>CEP</label>
+                                            <input type="text" name="cep" value="01234-567" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <input type="text" name="estado" value="SP" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Cidade</label>
+                                            <input type="text" name="cidade" value="São Paulo" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Bairro</label>
+                                            <input type="text" name="bairro" value="Vila Madalena" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Rua</label>
+                                            <input type="text" name="rua" value="Rua das Flores" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Número</label>
+                                            <input type="text" name="numero" value="123" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Complemento</label>
+                                            <input type="text" name="complemento" value="Apto 45" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="address-actions">
+                                        <button class="btn-edit-address">Editar</button>
+                                        <button class="btn-save" style="display: none;">Salvar</button>
+                                        <button class="btn-cancel" style="display: none;">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Settings Section -->
+                    <div id="settings-section" class="profile-section">
+                        <div class="section-header">
+                            <h2>Configurações</h2>
+                        </div>
+
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h3>Notificações por Email</h3>
+                                    <p>Receber atualizações sobre pedidos e promoções</p>
+                                </div>
+                                <div class="setting-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h3>Newsletter</h3>
+                                    <p>Receber novidades e ofertas especiais</p>
+                                </div>
+                                <div class="setting-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h3>Alterar Senha</h3>
+                                    <p>Atualizar sua senha de acesso</p>
+                                </div>
+                                <div class="setting-action">
+                                    <button class="btn-change-password">Alterar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo/rodapé_logo.png" alt="Logo Rodapé" class="footer-logo-image">
+                </div>
+                <div class="footer-links">
+                    <a href="#catalogo">Catálogo</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Valeriano. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="perfil.js"></script>
+    <script>
+        // Profile page functionality
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.profile-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionName + '-section').classList.add('active');
+            
+            // Update navigation
+            const navItems = document.querySelectorAll('.profile-nav-menu li');
+            navItems.forEach(item => item.classList.remove('active'));
+            event.target.closest('li').classList.add('active');
+        }
+
+        function toggleEditMode(section) {
+            const inputs = document.querySelectorAll('#' + section + '-section input, #' + section + '-section select');
+            const editBtn = document.querySelector('.btn-edit');
+            const saveBtn = document.querySelector('.btn-save');
+            const cancelBtn = document.querySelector('.btn-cancel');
+            
+            if (inputs[0].readOnly) {
+                // Enable edit mode
+                inputs.forEach(input => input.readOnly = false);
+                editBtn.style.display = 'none';
+                saveBtn.style.display = 'inline-flex';
+                cancelBtn.style.display = 'inline-flex';
+            } else {
+                // Disable edit mode
+                inputs.forEach(input => input.readOnly = true);
+                editBtn.style.display = 'inline-flex';
+                saveBtn.style.display = 'none';
+                cancelBtn.style.display = 'none';
+            }
+        }
+
+        function saveProfile() {
+            showCartNotification('Perfil atualizado com sucesso!', 'success');
+            toggleEditMode('profile');
+        }
+
+        function cancelEdit() {
+            toggleEditMode('profile');
+        }
+
+        // Função para fazer logout
+        function logout() {
+            // Limpar dados do usuário
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            
+            // Redirecionar para página inicial
+            window.location.href = 'index.html';
+        }
+
+        // Initialize profile page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('userLoggedIn');
+            if (!isLoggedIn) {
+                // Redirect to login if not logged in
+                window.location.href = 'index.html';
+            } else {
+                // Atualizar informações do usuário na página
+                const userName = localStorage.getItem('userName');
+                const userEmail = localStorage.getItem('userEmail');
+                
+                if (userName) {
+                    const nameInput = document.querySelector('input[type="text"]');
+                    if (nameInput) nameInput.value = userName;
+                }
+                
+                if (userEmail) {
+                    const emailInput = document.querySelector('input[type="email"]');
+                    if (emailInput) emailInput.value = userEmail;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

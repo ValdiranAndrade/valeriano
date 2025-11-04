@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAVORITOS - VALERIANO</title>
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="favoritos-page">
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/Valeriano_Logo.png" alt="Valeriano Logo" class="logo-image">
+                    </a>
+                </div>
+                
+                <div class="search-icon">
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Buscar produtos">
+                        <i class="fas fa-search" onclick="performSearch()"></i>
+                    </div>
+                </div>
+                
+                <div class="nav-icons">
+                    <a href="perfil.html" class="login-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="favoritos.html" style="color: #BB4430; text-decoration: none;"><i class="fas fa-heart"></i></a>
+                    <a href="carrinho.html" style="color: #000; text-decoration: none;"><i class="fas fa-shopping-bag"></i></a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Menu de Navegação Principal -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="main-nav-menu">
+                    <li><a href="camisetas.html">CAMISETA</a></li>
+                    <li><a href="SHORTZIN.html">SHORTS</a></li>
+                    <li><a href="casacos.html">CASACO</a></li>
+                    <li><a href="Catalogo_Boné.html">BONÉ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="favoritos-hero">
+        <div class="container">
+            <div class="favoritos-banner">
+                <h1>Meus Favoritos</h1>
+                <p>Produtos que você adicionou aos favoritos</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Favoritos Content -->
+    <section class="favoritos-content">
+        <div class="container">
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2>Nenhum favorito ainda</h2>
+                <p>Adicione produtos aos seus favoritos para vê-los aqui</p>
+                <a href="camisetas.html" class="btn-explore">Explorar Produtos</a>
+            </div>
+
+            <!-- Favoritos Grid -->
+            <div id="favoritos-grid" class="favoritos-grid">
+                <!-- Os produtos favoritos serão carregados dinamicamente aqui -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo/rodapé_logo.png" alt="Valeriano Logo" class="footer-logo-image">
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>INFORMAÇÕES ÚTEIS</h4>
+                        <ul>
+                            <li><a href="#rastreio">Rastreie seu pedido</a></li>
+                            <li><a href="#entrega">Política de Entrega</a></li>
+                            <li><a href="#pagamento">Formas de Pagamento</a></li>
+                            <li><a href="#troca">Política de Troca e Devolução</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>EXPLORE</h4>
+                        <ul>
+                            <li><a href="#feminino">Feminino</a></li>
+                            <li><a href="#masculino">Masculino</a></li>
+                            <li><a href="#infantil">Infantil</a></li>
+                            <li><a href="#ofertas">Oportunidades</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>ATENDIMENTO</h4>
+                        <ul>
+                            <li><a href="#contato">Contato</a></li>
+                            <li><a href="#duvidas">Dúvidas Frequentes</a></li>
+                            <li><a href="#tamanhos">Guia de Tamanhos</a></li>
+                            <li><a href="#cuidados">Cuidados com as Roupas</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>REDES SOCIAIS</h4>
+                        <ul>
+                            <li><a href="#instagram">Instagram</a></li>
+                            <li><a href="#facebook">Facebook</a></li>
+                            <li><a href="#twitter">Twitter</a></li>
+                            <li><a href="#youtube">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Valeriano. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Funcionalidade da página de favoritos
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFavorites();
+        });
+
+        function loadFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('favoriteProducts')) || [];
+            const favoritosGrid = document.getElementById('favoritos-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            if (favorites.length === 0) {
+                favoritosGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            favoritosGrid.style.display = 'grid';
+            emptyState.style.display = 'none';
+
+            favoritosGrid.innerHTML = '';
+
+            favorites.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'favorite-product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.alt}">
+                        <button class="remove-favorite-btn" onclick="removeFromFavorites('${product.name}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <div class="product-actions">
+                            <button class="btn-add-cart" onclick="addToCartAndRedirect()">Adicionar ao Carrinho</button>
+                        </div>
+                    </div>
+                `;
+                favoritosGrid.appendChild(productCard);
+            });
+        }
+
+        // Atualizar a página quando um favorito for removido
+        function removeFromFavorites(productName) {
+            let favorites = JSON.parse(localStorage.getItem('favoriteProducts')) || [];
+            favorites = favorites.filter(fav => fav.name !== productName);
+            localStorage.setItem('favoriteProducts', JSON.stringify(favorites));
+            loadFavorites(); // Recarregar a página
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado - Loja de Roupas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/logo.png" alt="Loja de Roupas">
+                    </a>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar produtos..." id="searchInput">
+                    <i class="fas fa-search" onclick="performSearch()"></i>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="favoritos.html" class="action-btn">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoritos</span>
+                    </a>
+                    <a href="carrinho.html" class="action-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Carrinho</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <a href="perfil.html" class="action-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Confirmation Page -->
+    <div class="confirmation-page">
+        <div class="container">
+            <div class="confirmation-content">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                
+                <h1>Pedido Confirmado!</h1>
+                <p class="confirmation-message">
+                    Seu pedido foi realizado com sucesso e está sendo processado.
+                </p>
+                
+                <div class="order-info" id="orderInfo">
+                    <!-- Order details will be loaded here -->
+                </div>
+                
+                <div class="confirmation-actions">
+                    <a href="index.html" class="btn-primary">
+                        <i class="fas fa-home"></i>
+                        Continuar Comprando
+                    </a>
+                    <a href="perfil.html" class="btn-secondary">
+                        <i class="fas fa-user"></i>
+                        Ver Meus Pedidos
+                    </a>
+                </div>
+                
+                <div class="next-steps">
+                    <h3>Próximos Passos:</h3>
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Você receberá um email de confirmação</span>
+                        </div>
+                        <div class="step-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Seu pedido será preparado para envio</span>
+                        </div>
+                        <div class="step-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Você receberá o código de rastreamento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Loja de Roupas</h3>
+                    <p>Sua loja de confiança para moda e estilo.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Úteis</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="perfil.html">Minha Conta</a></li>
+                        <li><a href="carrinho.html">Carrinho</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Email: contato@lojaderoupas.com</p>
+                    <p>Telefone: (11) 99999-9999</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Loja de Roupas. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="confirmacao.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Valeriano</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-192x192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-512x512.png" sizes="512x512" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/Valeriano_Logo.png" alt="Valeriano Logo" class="logo-image">
+                    </a>
+                </div>
+                
+                <div class="search-icon">
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Buscar produtos">
+                        <i class="fas fa-search" onclick="performSearch()"></i>
+                    </div>
+                </div>
+                
+                <div class="nav-icons">
+                    <a href="perfil.html" class="login-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="favoritos.html" style="color: #000; text-decoration: none;"><i class="fas fa-heart"></i></a>
+                    <a href="carrinho.html" style="color: #000; text-decoration: none;"><i class="fas fa-shopping-bag"></i></a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Menu de Navegação Principal -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="main-nav-menu">
+                    <li><a href="camisetas.html">CAMISETA</a></li>
+                    <li><a href="SHORTZIN.html">SHORTS</a></li>
+                    <li><a href="casacos.html">CASACO</a></li>
+                    <li><a href="Catalogo_Boné.html">BONÉ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Login Hero Section -->
+    <section class="login-hero">
+        <div class="container">
+            <div class="login-banner">
+                <h1>ENTRAR</h1>
+                <p>Acesse sua conta e continue sua jornada de estilo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Form Section -->
+    <section class="login-content">
+        <div class="container">
+            <div class="login-layout">
+                <!-- Formulário de Login -->
+                <div class="login-form-section">
+                    <div class="form-container">
+                        <h2>ACESSO À CONTA</h2>
+                        
+                        <form id="loginForm" class="login-form">
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                                <span class="error-message" id="email-error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="senha">Senha</label>
+                                <div class="password-input">
+                                    <input type="password" id="senha" name="senha" required>
+                                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                                        <i class="fas fa-eye" id="password-icon"></i>
+                                    </button>
+                                </div>
+                                <span class="error-message" id="senha-error"></span>
+                            </div>
+                            
+                            <div class="form-options">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="lembrar" name="lembrar">
+                                    <label for="lembrar">Lembrar de mim</label>
+                                </div>
+                                
+                                <a href="#" class="forgot-password">Esqueci minha senha</a>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    ENTRAR
+                                </button>
+                                
+                                <div class="signup-link">
+                                    <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Benefícios -->
+                <div class="beneficios-section">
+                    <h2>BENEFÍCIOS</h2>
+                    
+                    <div class="beneficios-list">
+                        <div class="beneficio-item">
+                            <div class="beneficio-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <div class="beneficio-content">
+                                <h3>Frete Grátis</h3>
+                                <p>Em compras acima de R$ 200,00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="beneficio-item">
+                            <div class="beneficio-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div class="beneficio-content">
+                                <h3>Ofertas Exclusivas</h3>
+                                <p>Acesso a produtos e promoções especiais</p>
+                            </div>
+                        </div>
+                        
+                        <div class="beneficio-item">
+                            <div class="beneficio-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="beneficio-content">
+                                <h3>Lista de Favoritos</h3>
+                                <p>Salve seus produtos preferidos</p>
+                            </div>
+                        </div>
+                        
+                        <div class="beneficio-item">
+                            <div class="beneficio-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div class="beneficio-content">
+                                <h3>Histórico de Pedidos</h3>
+                                <p>Acompanhe todos os seus pedidos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo/rodapé_logo.png" alt="Logo Rodapé" class="footer-logo-image">
+                </div>
+                <div class="footer-links">
+                    <a href="#catalogo">Catálogo</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Valeriano. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

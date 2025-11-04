@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Boné - Valeriano</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-192x192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-512x512.png" sizes="512x512" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="camisetas-page">
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/Valeriano_Logo.png" alt="Valeriano Logo" class="logo-image">
+                    </a>
+                </div>
+                
+                <div class="search-icon">
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Buscar produtos">
+                        <i class="fas fa-search" onclick="performSearch()"></i>
+                    </div>
+                </div>
+                
+                <div class="nav-icons">
+                    <a href="perfil.html" class="login-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="favoritos.html" style="color: #000; text-decoration: none;"><i class="fas fa-heart"></i></a>
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Menu de Navegação Principal -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="main-nav-menu">
+                    <li><a href="camisetas.html">CAMISETA</a></li>
+                    <li><a href="SHORTZIN.html">SHORTS</a></li>
+                    <li><a href="casacos.html">CASACO</a></li>
+                    <li><a href="Catalogo_Boné.html" class="active">BONÉ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Hero Banner -->
+    <section class="category-hero">
+        <div class="container">
+            <div class="category-banner">
+                <h1>Catálogo Boné</h1>
+                <p>Bonés masculinos com design moderno e qualidade premium. Modelos confortáveis e versáteis para todas as ocasiões e estações.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros e Ordenação -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-container">
+                <div class="filters-left">
+                    <div class="filter-group">
+                        <label>Estilo</label>
+                        <select class="filter-select">
+                            <option value="">Todos os estilos</option>
+                            <option value="basica">Básica</option>
+                            <option value="estampada">Estampada</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Cor</label>
+                        <select class="filter-select">
+                            <option value="">Todas as cores</option>
+                            <option value="preto">Preto</option>
+                            <option value="branco">Branco</option>
+                            <option value="azul">Azul</option>
+                            <option value="cinza">Cinza</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Gênero</label>
+                        <select class="filter-select">
+                            <option value="">Todos os gêneros</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminino</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Tamanho</label>
+                        <select class="filter-select">
+                            <option value="">Todos os tamanhos</option>
+                            <option value="p">P</option>
+                            <option value="m">M</option>
+                            <option value="g">G</option>
+                            <option value="gg">GG</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filters-right">
+                    <div class="results-count">
+                        <span>1 Produto</span>
+                    </div>
+                    <div class="sort-group">
+                        <label>Ordenar por</label>
+                        <select class="sort-select">
+                            <option value="relevancia">Relevância</option>
+                            <option value="novidades">Novidades</option>
+                            <option value="mais-vendidos">Mais vendidos</option>
+                            <option value="descontos">Descontos</option>
+                            <option value="preco-maior">Preço: Do maior para o menor</option>
+                            <option value="preco-menor">Preço: Do menor para o maior</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produtos Grid -->
+    <section class="products-grid-section">
+        <div class="container">
+            <div class="products-grid">
+                <!-- Produto BONÉ -->
+                <a href="bone.html" class="product-link">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1521369909029-2afed882baee?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Boné">
+                            <button class="like-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3>BONÉ</h3>
+                            <p class="price">R$ 159,90</p>
+                            <div class="color-options">
+                                <div class="color-label">
+                                    <span class="label-text">Cor</span>
+                                    <span class="selected-color">Preto</span>
+                                </div>
+                                <div class="color-swatches">
+                                    <div class="color-swatch active" style="background-color: #000000;" data-color="preto"></div>
+                                    <div class="color-swatch" style="background-color: #2f4538;" data-color="verde-musgo"></div>
+                                    <div class="color-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="branco"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Produtos Sugeridos -->
+    <section class="suggested-products">
+        <div class="container">
+            <h2>Produtos sugeridos</h2>
+            <div class="suggested-grid">
+                <div class="suggested-item">
+                    <a href="#ofertas">Ofertas</a>
+                </div>
+                <div class="suggested-item">
+                    <a href="#lancamentos">Lançamentos</a>
+                </div>
+                <div class="suggested-item">
+                    <a href="#mais-vendidos">Mais vendidos</a>
+                </div>
+                <div class="suggested-item">
+                    <a href="#camisas">Camisas</a>
+                </div>
+                <div class="suggested-item">
+                    <a href="#jaquetas">Jaquetas</a>
+                </div>
+                <div class="suggested-item">
+                    <a href="#calcas">Calças</a>
+                </div>
+                <div class="suggested-item">
+                    <a href="#shorts">Shorts</a>
+                </div>
+                <div class="suggested-item">
+                    <a href="#tricots">Tricots</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo/rodapé_logo.png" alt="Logo Rodapé" class="footer-logo-image">
+                </div>
+                <div class="footer-links">
+                    <a href="#catalogo">Catálogo</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Valeriano. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Funcionalidade dos botões de favoritos na página de bonés
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeButtons = document.querySelectorAll('.like-btn');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    this.classList.toggle('liked');
+                    const icon = this.querySelector('i');
+                    
+                    if (this.classList.contains('liked')) {
+                        icon.className = 'fas fa-heart';
+                        
+                        // Adicionar produto aos favoritos
+                        const productCard = this.closest('.product-card');
+                        const productName = productCard.querySelector('h3').textContent;
+                        const productPrice = productCard.querySelector('.price').textContent;
+                        const productImage = productCard.querySelector('img').src;
+                        const productAlt = productCard.querySelector('img').alt;
+                        
+                        addToFavorites({
+                            id: Date.now(),
+                            name: productName,
+                            price: productPrice,
+                            image: productImage,
+                            alt: productAlt
+                        });
+                    } else {
+                        icon.className = 'far fa-heart';
+                        
+                        // Remover produto dos favoritos
+                        const productCard = this.closest('.product-card');
+                        const productName = productCard.querySelector('h3').textContent;
+                        removeFromFavorites(productName);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

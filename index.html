@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valeriano - Sofisticado e Minimalista</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-192x192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-512x512.png" sizes="512x512" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/Valeriano_Logo.png" alt="Valeriano Logo" class="logo-image">
+                    </a>
+                </div>
+                
+                
+                <div class="search-icon">
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Buscar produtos">
+                        <i class="fas fa-search" onclick="performSearch()"></i>
+                    </div>
+                </div>
+                
+                <div class="nav-icons">
+                    <a href="perfil.html" class="login-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="favoritos.html" style="color: #000; text-decoration: none;"><i class="fas fa-heart"></i></a>
+                    <a href="carrinho.html" style="color: #000; text-decoration: none;"><i class="fas fa-shopping-bag"></i></a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Menu de Navegação Principal -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="main-nav-menu">
+                    <li><a href="camisetas.html">CAMISETA</a></li>
+                    <li><a href="SHORTZIN.html">SHORTS</a></li>
+                    <li><a href="casacos.html">CASACO</a></li>
+                    <li><a href="Catalogo_Boné.html">BONÉ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-carousel">
+            <div class="hero-slides">
+                <div class="hero-slide active">
+                    <div class="hero-image">
+                        <img src="imagens/camisa1.jpg" alt="Coleção Inverno - Modelo 1">
+                    </div>
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1>CONFORTO TOTAL</h1>
+                            <p>Roupas quentes e estilosas</p>
+                        </div>
+                        <button class="btn-catalog" onclick="addToCartAndRedirect()">Descobrir</button>
+                    </div>
+                </div>
+                
+                <div class="hero-slide">
+                    <div class="hero-image">
+                        <img src="imagens/2 (1).png" alt="Estilo Casual - Modelo 2">
+                    </div>
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1>COMFORTO E ESTILO</h1>
+                            <p>Perfeito para o dia a dia</p>
+                        </div>
+                        <button class="btn-catalog" onclick="addToCartAndRedirect()">Explorar</button>
+                    </div>
+                </div>
+                
+                <div class="hero-slide">
+                    <div class="hero-image">
+                        <img src="imagens/3.jpg" alt="Coleção Esportiva - Modelo 3">
+                    </div>
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1>PERFORMANCE</h1>
+                            <p>Roupas para atividades físicas</p>
+                        </div>
+                        <button class="btn-catalog" onclick="addToCartAndRedirect()">Ver Mais</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Indicadores de pontos -->
+            <div class="hero-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+            </div>
+            
+        </div>
+    </section>
+
+
+    <!-- Summer Collection Section -->
+    <section class="summer-collection">
+        <div class="container">
+            <div class="collection-header">
+                <h2>NOVIDADES</h2>
+            </div>
+            
+            <div class="products-showcase">
+                <button class="showcase-nav prev" onclick="moveShowcase(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="showcase-container">
+                    <div class="showcase-track">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <a href="produto.html">
+                                    <img src="imagens/c1.png" alt="Camiseta Oversize Elegante">
+                                </a>
+                                <button class="like-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <div class="product-tag">NEW</div>
+                            </div>
+                            <div class="product-info">
+                                <a href="produto.html">
+                                    <h3>Camiseta Oversize</h3>
+                                    <p class="price">R$ 299,90</p>
+                                </a>
+                                <div class="color-options">
+                                    <div class="color-label">
+                                        <span class="label-text">Cor</span>
+                                        <span class="selected-color">Preto</span>
+                                    </div>
+                                    <div class="color-swatches">
+                                        <div class="color-swatch active" style="background-color: #000000;" data-color="preto"></div>
+                                        <div class="color-swatch" style="background-color: #2f4538;" data-color="verde-musgo"></div>
+                                        <div class="color-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="branco"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="casacosemcapuz.html" class="product-link">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="imagens/c2.png" alt="Casaco sem capuz">
+                                    <button class="like-btn">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="product-info">
+                                    <h3>Casaco sem capuz</h3>
+                                    <p class="price">R$ 199,90</p>
+                                    <div class="color-options">
+                                        <div class="color-label">
+                                            <span class="label-text">Cor</span>
+                                            <span class="selected-color">Preto</span>
+                                        </div>
+                                        <div class="color-swatches">
+                                            <div class="color-swatch active" style="background-color: #000000;" data-color="preto"></div>
+                                            <div class="color-swatch" style="background-color: #2f4538;" data-color="verde-musgo"></div>
+                                            <div class="color-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="branco"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="casacocomcapuz.html" class="product-link">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="imagens/c3.png" alt="Casaco com Capuz">
+                                    <button class="like-btn">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="product-info">
+                                    <h3>Casaco com Capuz</h3>
+                                    <p class="price">R$ 89,90</p>
+                                    <div class="color-options">
+                                        <div class="color-label">
+                                            <span class="label-text">Cor</span>
+                                            <span class="selected-color">Preto</span>
+                                        </div>
+                                        <div class="color-swatches">
+                                            <div class="color-swatch active" style="background-color: #000000;" data-color="preto"></div>
+                                            <div class="color-swatch" style="background-color: #2f4538;" data-color="verde-musgo"></div>
+                                            <div class="color-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="branco"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="shorts.html" class="product-link">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Shorts">
+                                    <button class="like-btn">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <div class="product-tag">HOT</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3>Shorts</h3>
+                                    <p class="price">R$ 249,90</p>
+                                    <div class="color-options">
+                                        <div class="color-label">
+                                            <span class="label-text">Cor</span>
+                                            <span class="selected-color">Preto</span>
+                                        </div>
+                                        <div class="color-swatches">
+                                            <div class="color-swatch active" style="background-color: #000000;" data-color="preto"></div>
+                                            <div class="color-swatch" style="background-color: #2f4538;" data-color="verde-musgo"></div>
+                                            <div class="color-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="branco"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="bone.html" class="product-link">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Boné">
+                                    <button class="like-btn">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="product-info">
+                                    <h3>Boné</h3>
+                                    <p class="price">R$ 159,90</p>
+                                    <div class="color-options">
+                                        <div class="color-label">
+                                            <span class="label-text">Cor</span>
+                                            <span class="selected-color">Preto</span>
+                                        </div>
+                                        <div class="color-swatches">
+                                            <div class="color-swatch active" style="background-color: #000000;" data-color="preto"></div>
+                                            <div class="color-swatch" style="background-color: #2f4538;" data-color="verde-musgo"></div>
+                                            <div class="color-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="branco"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                </div>
+                
+                <button class="showcase-nav next" onclick="moveShowcase(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presença Jeans Banner Section -->
+    <section class="presenca-jeans-banner">
+        <div class="banner-container">
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h2>CAMISETA</h2>
+                    <a href="camisetas.html" class="banner-cta">Compre agora</a>
+                </div>
+                <div class="banner-image">
+                    <img src="imagens/4.webp" alt="Presença Jeans - Modelo Feminina">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nova Seção com Duas Imagens -->
+    <section class="dual-images-section">
+        <div class="container">
+            <div class="dual-images-grid">
+                <div class="dual-image-item">
+                    <img src="imagens/3.jpg" alt="Modelo 1">
+                    <div class="image-text shorts-text">
+                        <h2>SHORTS</h2>
+                        <a href="carrinho.html" class="image-cta" onclick="addToCartAndRedirect()">COMPRE AGORA</a>
+                    </div>
+                </div>
+                <div class="dual-image-item">
+                    <img src="imagens/5.webp" alt="Modelo 2">
+                    <div class="image-text casaco-text">
+                        <h2>CASACO</h2>
+                        <a href="carrinho.html" class="image-cta" onclick="addToCartAndRedirect()">COMPRE AGORA</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>QUEM SOMOS</h2>
+                <p>VALERIANO é a expressão da sofisticação em sua forma mais simples. Inspirada numa visão familiar, a marca carrega essência, sabedoria, princípios que ultrapassam o tempo. Cada criação reflete o equilíbrio entre elegância e minimalismo. Nosso propósito é traduzir a elegância em formas simples, vestir a sofisticação que existe na essência, e não no excesso.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <h2>CONTATOS</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>contato@valeriano.com.br</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>(11) 99999-9999</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>São Paulo, SP - Brasil</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo/rodapé_logo.png" alt="Logo Rodapé" class="footer-logo-image">
+                </div>
+                <div class="footer-links">
+                    <a href="#catalogo">Catálogo</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Valeriano. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Aviso -->
+    <div id="warningModal" class="warning-modal">
+        <div class="warning-content">
+            <!-- Aviso sobre Golpes -->
+            <div class="scam-warning">
+                <div class="warning-text">
+                    <p><strong>Atenção:</strong> não enviamos mensagens sobre frete ou transportadoras. Todo o pagamento acontece no ato da sua compra. Cuidado com golpes.</p>
+                </div>
+                <button class="close-warning" onclick="closeScamWarning()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Aviso de Cookies -->
+            <div class="cookie-warning">
+                <h3>AVISO DE COOKIES</h3>
+                <p>Olá, este é o nosso Aviso de Cookies. Quando você visita nosso site ou usa um aplicativo móvel, nós colocamos um ou mais cookies em seu dispositivo ou usamos o Javascript, HTML 5 e outras tecnologias digitais para coletar informações de seu computador, celular ou outro dispositivo. Esta informação pode conter dados pessoais. Nesta política de cookies, informaremos quais cookies usaremos e quais suas funções. A forma como processamos os dados pessoais que obtemos de seu dispositivo é descrita em nosso Aviso de Privacidade. Quando você visita nosso site, consideraremos isso como sua solicitação especifica para fornecer a você toda a funcionalidade do site, incluindo, entre outros, a capacidade de comprar um item em nossa loja virtual.</p>
+                <button class="accept-cookies" onclick="acceptCookies()">ESTOU CIENTE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-content">
+            <h2>Escolha uma opção para entrar</h2>
+            
+            <div class="login-options">
+                <button class="login-option-btn email-code-btn" onclick="showEmailCodeForm()">
+                    RECEBER CÓDIGO DE ACESSO<br>POR EMAIL
+                </button>
+                
+                <button class="login-option-btn email-password-btn" onclick="showEmailPasswordForm()">
+                    ENTRAR COM EMAIL E SENHA
+                </button>
+                
+            </div>
+            
+            <button class="close-modal" onclick="closeLoginModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

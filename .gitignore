@@ -1,0 +1,24 @@
+# Backend
+backend/node_modules/
+backend/.env
+backend/logs/
+backend/*.log
+backend/npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build
+dist/
+build/
+
+# Logs
+*.log
+

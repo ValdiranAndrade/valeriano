@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - Valeriano</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-192x192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-512x512.png" sizes="512x512" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/Valeriano_Logo.png" alt="Valeriano Logo" class="logo-image">
+                    </a>
+                </div>
+                
+                <div class="search-icon">
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Buscar produtos">
+                        <i class="fas fa-search" onclick="performSearch()"></i>
+                    </div>
+                </div>
+                
+                <div class="nav-icons">
+                    <a href="perfil.html" class="login-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="favoritos.html" style="color: #000; text-decoration: none;"><i class="fas fa-heart"></i></a>
+                    <a href="carrinho.html" style="color: #000; text-decoration: none;"><i class="fas fa-shopping-bag"></i></a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Menu de Navegação Principal -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="main-nav-menu">
+                    <li><a href="camisetas.html">CAMISETA</a></li>
+                    <li><a href="SHORTZIN.html">SHORTS</a></li>
+                    <li><a href="casacos.html">CASACO</a></li>
+                    <li><a href="Catalogo_Boné.html">BONÉ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Início</a>
+                <span class="separator">></span>
+                <a href="carrinho.html">Carrinho</a>
+                <span class="separator">></span>
+                <span class="current">Pagamento</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Payment Page -->
+    <div class="payment-page">
+        <div class="container">
+            <div class="payment-header">
+                <h1>Finalizar Compra</h1>
+                <p>Complete seu pedido de forma segura</p>
+            </div>
+
+            <div class="payment-layout">
+                <!-- Payment Form -->
+                <div class="payment-form-section">
+                    <div class="form-container">
+                        <form id="payment-form" class="payment-form">
+                            <!-- Delivery Address -->
+                            <div class="form-section">
+                                <h2>
+                                    <i class="fas fa-truck"></i>
+                                    Endereço de Entrega
+                                </h2>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="cep">CEP *</label>
+                                        <input type="text" id="cep" name="cep" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="estado">Estado *</label>
+                                        <select id="estado" name="estado" required>
+                                            <option value="">Selecione</option>
+                                            <option value="AC">Acre</option>
+                                            <option value="AL">Alagoas</option>
+                                            <option value="AP">Amapá</option>
+                                            <option value="AM">Amazonas</option>
+                                            <option value="BA">Bahia</option>
+                                            <option value="CE">Ceará</option>
+                                            <option value="DF">Distrito Federal</option>
+                                            <option value="ES">Espírito Santo</option>
+                                            <option value="GO">Goiás</option>
+                                            <option value="MA">Maranhão</option>
+                                            <option value="MT">Mato Grosso</option>
+                                            <option value="MS">Mato Grosso do Sul</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="PA">Pará</option>
+                                            <option value="PB">Paraíba</option>
+                                            <option value="PR">Paraná</option>
+                                            <option value="PE">Pernambuco</option>
+                                            <option value="PI">Piauí</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="RN">Rio Grande do Norte</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                            <option value="RO">Rondônia</option>
+                                            <option value="RR">Roraima</option>
+                                            <option value="SC">Santa Catarina</option>
+                                            <option value="SP">São Paulo</option>
+                                            <option value="SE">Sergipe</option>
+                                            <option value="TO">Tocantins</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="cidade">Cidade *</label>
+                                        <input type="text" id="cidade" name="cidade" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bairro">Bairro *</label>
+                                        <input type="text" id="bairro" name="bairro" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="rua">Rua *</label>
+                                        <input type="text" id="rua" name="rua" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="numero">Número *</label>
+                                        <input type="text" id="numero" name="numero" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="complemento">Complemento</label>
+                                    <input type="text" id="complemento" name="complemento" placeholder="Apartamento, casa, etc.">
+                                </div>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="form-section">
+                                <h2>
+                                    <i class="fas fa-credit-card"></i>
+                                    Forma de Pagamento
+                                </h2>
+                                <div class="payment-methods">
+                                    <div class="payment-option">
+                                        <input type="radio" id="credit-card" name="payment-method" value="credit-card" required>
+                                        <label for="credit-card">
+                                            <i class="fas fa-credit-card"></i>
+                                            Cartão de Crédito
+                                        </label>
+                                    </div>
+                                    <div class="payment-option">
+                                        <input type="radio" id="debit-card" name="payment-method" value="debit-card">
+                                        <label for="debit-card">
+                                            <i class="fas fa-credit-card"></i>
+                                            Cartão de Débito
+                                        </label>
+                                    </div>
+                                    <div class="payment-option">
+                                        <input type="radio" id="pix" name="payment-method" value="pix">
+                                        <label for="pix">
+                                            <i class="fas fa-qrcode"></i>
+                                            PIX
+                                        </label>
+                                    </div>
+                                    <div class="payment-option">
+                                        <input type="radio" id="boleto" name="payment-method" value="boleto">
+                                        <label for="boleto">
+                                            <i class="fas fa-barcode"></i>
+                                            Boleto Bancário
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Credit Card Details -->
+                                <div id="card-details" class="card-details" style="display: none;">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="card-number">Número do Cartão *</label>
+                                            <input type="text" id="card-number" name="card-number" placeholder="0000 0000 0000 0000">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="card-name">Nome no Cartão *</label>
+                                            <input type="text" id="card-name" name="card-name" placeholder="Nome como está no cartão">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="expiry-date">Validade *</label>
+                                            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/AA">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cvv">CVV *</label>
+                                            <input type="text" id="cvv" name="cvv" placeholder="000">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="installments">Parcelamento</label>
+                                        <select id="installments" name="installments">
+                                            <option value="1">À vista (1x)</option>
+                                            <option value="2">2x sem juros</option>
+                                            <option value="3">3x sem juros</option>
+                                            <option value="4">4x sem juros</option>
+                                            <option value="5">5x sem juros</option>
+                                            <option value="6">6x sem juros</option>
+                                            <option value="10">10x com juros</option>
+                                            <option value="12">12x com juros</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- PIX Details -->
+                                <div id="pix-details" class="pix-details" style="display: none;">
+                                    <div class="pix-info">
+                                        <i class="fas fa-qrcode"></i>
+                                        <p>Você será redirecionado para o PIX após confirmar o pedido</p>
+                                        <p class="pix-note">Pagamento instantâneo e seguro</p>
+                                    </div>
+                                </div>
+
+                                <!-- Boleto Details -->
+                                <div id="boleto-details" class="boleto-details" style="display: none;">
+                                    <div class="boleto-info">
+                                        <i class="fas fa-barcode"></i>
+                                        <p>O boleto será gerado após confirmar o pedido</p>
+                                        <p class="boleto-note">Válido por 3 dias úteis</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Info -->
+                            <div class="form-section">
+                                <h2>
+                                    <i class="fas fa-user"></i>
+                                    Informações de Contato
+                                </h2>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="full-name">Nome Completo *</label>
+                                        <input type="text" id="full-name" name="full-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email *</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="phone">Telefone *</label>
+                                        <input type="tel" id="phone" name="phone" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cpf">CPF *</label>
+                                        <input type="text" id="cpf" name="cpf" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Terms -->
+                            <div class="form-section">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="terms" name="terms" required>
+                                    <label for="terms">
+                                        Aceito os <a href="#" class="link-termos">termos e condições</a> e a <a href="#" class="link-termos">política de privacidade</a>
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="newsletter" name="newsletter">
+                                    <label for="newsletter">
+                                        Desejo receber ofertas e novidades por email
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn-finalizar">
+                                    <i class="fas fa-lock"></i>
+                                    Finalizar Pedido
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary-section">
+                    <div class="order-summary">
+                        <h2>Resumo do Pedido</h2>
+                        
+                        <div class="order-items" id="orderItems">
+                            <!-- Items will be loaded here -->
+                        </div>
+                        
+                        <div class="order-totals">
+                            <div class="total-line">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">R$ 0,00</span>
+                            </div>
+                            <div class="total-line">
+                                <span>Frete:</span>
+                                <span id="shipping">R$ 0,00</span>
+                            </div>
+                            <div id="shipping-info" class="shipping-info-line" style="display: none;">
+                                <small id="shipping-info-text"></small>
+                            </div>
+                            <div class="total-line">
+                                <span>Desconto:</span>
+                                <span id="discount">- R$ 0,00</span>
+                            </div>
+                            <div class="total-line total-final">
+                                <span>Total:</span>
+                                <span id="total">R$ 0,00</span>
+                            </div>
+                        </div>
+
+                        <div class="security-info">
+                            <div class="security-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Compra 100% segura</span>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-lock"></i>
+                                <span>Dados protegidos</span>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-truck"></i>
+                                <span>Entrega rápida</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Loja de Roupas</h3>
+                    <p>Sua loja de confiança para moda e estilo.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Úteis</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="perfil.html">Minha Conta</a></li>
+                        <li><a href="carrinho.html">Carrinho</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Email: contato@lojaderoupas.com</p>
+                    <p>Telefone: (11) 99999-9999</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Loja de Roupas. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Mercado Pago SDK -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="script.js"></script>
+    <script src="pagamento.js"></script>
+</body>
+</html>
+

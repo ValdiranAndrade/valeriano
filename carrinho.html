@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - Valeriano</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-192x192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="favicon/web-app-manifest-512x512.png" sizes="512x512" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="carrinho-page">
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/Valeriano_Logo.png" alt="Valeriano Logo" class="logo-image">
+                    </a>
+                </div>
+                
+                <div class="search-icon">
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Buscar produtos">
+                        <i class="fas fa-search" onclick="performSearch()"></i>
+                    </div>
+                </div>
+                
+                <div class="nav-icons">
+                    <a href="perfil.html" class="login-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="favoritos.html" style="color: #000; text-decoration: none;"><i class="fas fa-heart"></i></a>
+                    <a href="carrinho.html" style="color: #000; text-decoration: none;"><i class="fas fa-shopping-bag"></i></a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Menu de Navegação Principal -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="main-nav-menu">
+                    <li><a href="camisetas.html">CAMISETA</a></li>
+                    <li><a href="SHORTZIN.html">SHORTS</a></li>
+                    <li><a href="casacos.html">CASACO</a></li>
+                    <li><a href="Catalogo_Boné.html">BONÉ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Cart Hero Section -->
+    <section class="cart-hero">
+        <div class="container">
+            <div class="cart-banner">
+                <h1>MEU CARRINHO</h1>
+                <p>Revise seus itens antes de finalizar a compra</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <section class="cart-content">
+        <div class="container">
+            <div class="cart-layout">
+                <!-- Cart Items -->
+                <div class="cart-items-section">
+                    <div class="cart-items-header">
+                        <h2>ITENS NO CARRINHO</h2>
+                        <span class="items-count">3 itens</span>
+                    </div>
+
+                    <!-- Cart Items List -->
+                    <div class="cart-items-list">
+                        <!-- Item 1 -->
+                        <div class="cart-item">
+                            <div class="item-image">
+                                <img src="imagens/c1.png" alt="Camiseta Oversize">
+                            </div>
+                            <div class="item-details">
+                                <h3>Camiseta Oversize</h3>
+                                <div class="item-attributes">
+                                    <span class="attribute">Cor: Preto</span>
+                                    <span class="attribute">Tamanho: M</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price">R$ 299,90</span>
+                                </div>
+                            </div>
+                            <div class="item-quantity">
+                                <label>Quantidade</label>
+                                <div class="quantity-controls">
+                                    <button class="qty-btn minus" onclick="updateQuantity(this, -1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                    <button class="qty-btn plus" onclick="updateQuantity(this, 1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-total">
+                                <span class="total-price">R$ 299,90</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="remove-btn" onclick="removeItem(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="cart-item">
+                            <div class="item-image">
+                                <img src="imagens/c2.png" alt="Casaco sem capuz">
+                            </div>
+                            <div class="item-details">
+                                <h3>Casaco sem capuz</h3>
+                                <div class="item-attributes">
+                                    <span class="attribute">Cor: Verde Musgo</span>
+                                    <span class="attribute">Tamanho: G</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price">R$ 199,90</span>
+                                </div>
+                            </div>
+                            <div class="item-quantity">
+                                <label>Quantidade</label>
+                                <div class="quantity-controls">
+                                    <button class="qty-btn minus" onclick="updateQuantity(this, -1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="qty-input" value="2" min="1" max="10">
+                                    <button class="qty-btn plus" onclick="updateQuantity(this, 1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-total">
+                                <span class="total-price">R$ 399,80</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="remove-btn" onclick="removeItem(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="cart-item">
+                            <div class="item-image">
+                                <img src="imagens/c3.png" alt="Casaco com Capuz">
+                            </div>
+                            <div class="item-details">
+                                <h3>Casaco com Capuz</h3>
+                                <div class="item-attributes">
+                                    <span class="attribute">Cor: Branco</span>
+                                    <span class="attribute">Tamanho: P</span>
+                                </div>
+                                <div class="item-price">
+                                    <span class="price">R$ 89,90</span>
+                                </div>
+                            </div>
+                            <div class="item-quantity">
+                                <label>Quantidade</label>
+                                <div class="quantity-controls">
+                                    <button class="qty-btn minus" onclick="updateQuantity(this, -1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                                    <button class="qty-btn plus" onclick="updateQuantity(this, 1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-total">
+                                <span class="total-price">R$ 89,90</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="remove-btn" onclick="removeItem(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Actions -->
+                    <div class="cart-actions">
+                        <button class="btn-continue-shopping" onclick="window.location.href='index.html'">
+                            <i class="fas fa-arrow-left"></i>
+                            Continuar Comprando
+                        </button>
+                        <button class="btn-update-cart" onclick="updateCart()">
+                            <i class="fas fa-sync"></i>
+                            Atualizar Carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary-section">
+                    <div class="order-summary">
+                        <h3>RESUMO DO PEDIDO</h3>
+                        
+                        <div class="summary-line">
+                            <span>Subtotal (3 itens)</span>
+                            <span>R$ 789,60</span>
+                        </div>
+                        
+                        <div class="summary-line">
+                            <span>Frete</span>
+                            <span class="shipping-free">GRÁTIS</span>
+                        </div>
+                        
+                        <div class="summary-line promo-discount" style="display: none;">
+                            <span>Desconto</span>
+                            <span class="discount">-R$ 0,00</span>
+                        </div>
+                        
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span>R$ 789,60</span>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="promo-code-section">
+                            <h4>CÓDIGO PROMOCIONAL</h4>
+                            <div class="promo-input-group">
+                                <input type="text" placeholder="Digite seu código" class="promo-input">
+                                <button class="btn-apply-promo" onclick="applyPromoCode()">APLICAR</button>
+                            </div>
+                        </div>
+
+                        <!-- Checkout Button -->
+                        <button class="btn-checkout" onclick="proceedToCheckout()">
+                            <i class="fas fa-lock"></i>
+                            FINALIZAR COMPRA
+                        </button>
+
+                        <!-- Security Info -->
+                        <div class="security-info">
+                            <div class="security-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Compra 100% Segura</span>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-truck"></i>
+                                <span>Frete Grátis acima de R$ 200</span>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-undo"></i>
+                                <span>Troca e Devolução</span>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <div class="payment-methods">
+                            <h4>FORMAS DE PAGAMENTO</h4>
+                            <div class="payment-icons">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fas fa-credit-card"></i>
+                                <i class="fas fa-barcode"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shipping Info Section -->
+    <section class="shipping-info-section">
+        <div class="container">
+            <div class="shipping-info-grid">
+                <div class="shipping-card">
+                    <div class="shipping-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="shipping-content">
+                        <h3>ENTREGA EXPRESSA</h3>
+                        <p>Serviço disponível para algumas regiões do Estado de São Paulo, mediante contratação do serviço na página de finalização da compra.</p>
+                    </div>
+                </div>
+
+                <div class="shipping-card">
+                    <div class="shipping-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="shipping-content">
+                        <h3>PRAZO DE ENTREGA</h3>
+                        <p>Pedidos faturados de segunda a sexta-feira até o meio dia serão entregues no mesmo dia, até as 23:59.</p>
+                    </div>
+                </div>
+
+                <div class="shipping-card">
+                    <div class="shipping-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="shipping-content">
+                        <h3>IMPORTANTE</h3>
+                        <p>É essencial ter uma pessoa disponível para receber o pedido. O entregador está autorizado a esperar no máximo 5 minutos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo/rodapé_logo.png" alt="Logo Rodapé" class="footer-logo-image">
+                </div>
+                <div class="footer-links">
+                    <a href="#catalogo">Catálogo</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Valeriano. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Cart specific functionality
+        function updateQuantity(button, change) {
+            const input = button.parentElement.querySelector('.qty-input');
+            const currentValue = parseInt(input.value);
+            const newValue = Math.max(1, Math.min(10, currentValue + change));
+            
+            input.value = newValue;
+            updateItemTotal(input);
+            updateCartSummary();
+        }
+
+        function updateItemTotal(input) {
+            const cartItem = input.closest('.cart-item');
+            const priceElement = cartItem.querySelector('.price');
+            const totalElement = cartItem.querySelector('.total-price');
+            const quantity = parseInt(input.value);
+            
+            const price = parseFloat(priceElement.textContent.replace('R$ ', '').replace(',', '.'));
+            const total = price * quantity;
+            
+            totalElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        function removeItem(button) {
+            const cartItem = button.closest('.cart-item');
+            cartItem.style.animation = 'slideOut 0.3s ease-out';
+            
+            setTimeout(() => {
+                cartItem.remove();
+                updateCartSummary();
+                updateItemsCount();
+            }, 300);
+        }
+
+        function updateCartSummary() {
+            const cartItems = document.querySelectorAll('.cart-item');
+            let subtotal = 0;
+            
+            cartItems.forEach(item => {
+                const totalPrice = parseFloat(item.querySelector('.total-price').textContent.replace('R$ ', '').replace(',', '.'));
+                subtotal += totalPrice;
+            });
+            
+            const subtotalElement = document.querySelector('.summary-line span:last-child');
+            const totalElement = document.querySelector('.summary-total span:last-child');
+            
+            // Verificar se há desconto promocional aplicado
+            const discountLine = document.querySelector('.promo-discount');
+            let discount = 0;
+            
+            if (discountLine && discountLine.style.display !== 'none') {
+                const discountText = document.querySelector('.promo-discount .discount').textContent;
+                discount = parseFloat(discountText.replace('-R$ ', '').replace(',', '.'));
+            }
+            
+            const finalTotal = subtotal - discount;
+            
+            subtotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            totalElement.textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        function updateItemsCount() {
+            const cartItems = document.querySelectorAll('.cart-item');
+            const countElement = document.querySelector('.items-count');
+            const count = cartItems.length;
+            
+            countElement.textContent = `${count} ${count === 1 ? 'item' : 'itens'}`;
+        }
+
+        function applyPromoCode() {
+            const promoInput = document.querySelector('.promo-input');
+            const code = promoInput.value.trim().toUpperCase();
+            
+            if (code === 'VALERIANO10') {
+                // Aplicar desconto de 10%
+                const subtotal = getCartTotal();
+                const discountAmount = subtotal * 0.10;
+                
+                // Mostrar linha de desconto
+                const discountLine = document.querySelector('.promo-discount');
+                const discountValue = document.querySelector('.promo-discount .discount');
+                
+                discountLine.style.display = 'flex';
+                discountValue.textContent = `-R$ ${discountAmount.toFixed(2).replace('.', ',')}`;
+                
+                // Atualizar total
+                updateCartSummary();
+                
+                showCartNotification('Código aplicado com sucesso! Desconto de 10%', 'success');
+                
+                // Desabilitar input e botão
+                promoInput.disabled = true;
+                promoInput.style.backgroundColor = '#f0f0f0';
+                document.querySelector('.btn-apply-promo').disabled = true;
+                document.querySelector('.btn-apply-promo').textContent = 'APLICADO';
+                
+            } else if (code === 'FRETE20') {
+                // Aplicar desconto de 20%
+                const subtotal = getCartTotal();
+                const discountAmount = subtotal * 0.20;
+                
+                const discountLine = document.querySelector('.promo-discount');
+                const discountValue = document.querySelector('.promo-discount .discount');
+                
+                discountLine.style.display = 'flex';
+                discountValue.textContent = `-R$ ${discountAmount.toFixed(2).replace('.', ',')}`;
+                
+                updateCartSummary();
+                
+                showCartNotification('Código aplicado com sucesso! Desconto de 20%', 'success');
+                
+                const promoInput = document.querySelector('.promo-input');
+                promoInput.disabled = true;
+                promoInput.style.backgroundColor = '#f0f0f0';
+                document.querySelector('.btn-apply-promo').disabled = true;
+                document.querySelector('.btn-apply-promo').textContent = 'APLICADO';
+                
+            } else if (code === 'BOASVINDAS') {
+                // Aplicar desconto de 15%
+                const subtotal = getCartTotal();
+                const discountAmount = subtotal * 0.15;
+                
+                const discountLine = document.querySelector('.promo-discount');
+                const discountValue = document.querySelector('.promo-discount .discount');
+                
+                discountLine.style.display = 'flex';
+                discountValue.textContent = `-R$ ${discountAmount.toFixed(2).replace('.', ',')}`;
+                
+                updateCartSummary();
+                
+                showCartNotification('Código aplicado com sucesso! Desconto de 15%', 'success');
+                
+                const promoInput = document.querySelector('.promo-input');
+                promoInput.disabled = true;
+                promoInput.style.backgroundColor = '#f0f0f0';
+                document.querySelector('.btn-apply-promo').disabled = true;
+                document.querySelector('.btn-apply-promo').textContent = 'APLICADO';
+                
+            } else if (code) {
+                showCartNotification('Código inválido', 'error');
+            } else {
+                showCartNotification('Digite um código promocional', 'warning');
+            }
+        }
+
+        function proceedToCheckout() {
+            const cartItems = document.querySelectorAll('.cart-item');
+            
+            if (cartItems.length === 0) {
+                showNotification('Seu carrinho está vazio', 'warning');
+                return;
+            }
+            
+            showNotification('Redirecionando para o pagamento...', 'info');
+            setTimeout(() => {
+                window.location.href = 'pagamento.html';
+            }, 1000);
+        }
+
+        function updateCart() {
+            showNotification('Carrinho atualizado!', 'success');
+        }
+
+        // Initialize cart
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartSummary();
+            updateItemsCount();
+        });
+    </script>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-content">
+            <h2>Escolha uma opção para entrar</h2>
+            
+            <div class="login-options">
+                <button class="login-option-btn email-code-btn" onclick="showEmailCodeForm()">
+                    RECEBER CÓDIGO DE ACESSO<br>POR EMAIL
+                </button>
+                
+                <button class="login-option-btn email-password-btn" onclick="showEmailPasswordForm()">
+                    ENTRAR COM EMAIL E SENHA
+                </button>
+                
+            </div>
+            
+            <button class="close-modal" onclick="closeLoginModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

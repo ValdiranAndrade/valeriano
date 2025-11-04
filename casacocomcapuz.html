@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASACO COM CAPUZ - VALERIANO</title>
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="product-page">
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/Valeriano_Logo.png" alt="Valeriano Logo" class="logo-image">
+                    </a>
+                </div>
+                
+                <div class="search-icon">
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Buscar produtos">
+                        <i class="fas fa-search" onclick="performSearch()"></i>
+                    </div>
+                </div>
+                
+                <div class="nav-icons">
+                    <a href="perfil.html" class="login-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="favoritos.html" style="color: #000; text-decoration: none;"><i class="fas fa-heart"></i></a>
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Menu de Navegação Principal -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="main-nav-menu">
+                    <li><a href="camisetas.html">CAMISETA</a></li>
+                    <li><a href="SHORTZIN.html">SHORTS</a></li>
+                    <li><a href="casacosemcapuz.html">CASACO</a></li>
+                    <li><a href="Catalogo_Boné.html">BONÉ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Product Page -->
+    <main class="product-page">
+        <div class="product-container">
+            <!-- Product Images -->
+            <div class="product-images">
+                <div class="main-image">
+                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Casaco com Capuz">
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info">
+                <div class="product-header">
+                    <h1>CASACO COM CAPUZ</h1>
+                    <p class="product-subtitle">CASACO COM CAPUZ VALERIANO</p>
+                </div>
+
+                <div class="price-section">
+                    <span class="price">R$ 399,90</span>
+                </div>
+
+                <div class="color-section">
+                    <h3>COR</h3>
+                    <div class="color-options">
+                        <div class="color-label">
+                            <span class="label-text">Cor</span>
+                            <span class="selected-color">Preto</span>
+                        </div>
+                        <div class="color-swatches">
+                            <div class="color-swatch active" style="background-color: #000000;" data-color="preto"></div>
+                            <div class="color-swatch" style="background-color: #2f4538;" data-color="verde-musgo"></div>
+                            <div class="color-swatch" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="branco"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="size-section">
+                    <h3>TAMANHO</h3>
+                    <div class="size-options">
+                        <button class="size-btn">P</button>
+                        <button class="size-btn active">M</button>
+                        <button class="size-btn">G</button>
+                        <button class="size-btn">GG</button>
+                    </div>
+                </div>
+
+                <div class="quantity-section">
+                    <label for="quantity">QUANTIDADE</label>
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="decreaseQuantity()">-</button>
+                        <input type="number" id="quantity" value="1" min="1" max="10">
+                        <button class="qty-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-add-cart" onclick="addToCartAndRedirect()">COMPRAR AGORA</button>
+                    <button class="btn-favorite">
+                        <i class="fas fa-heart"></i>
+                        ADICIONAR AOS FAVORITOS
+                    </button>
+                </div>
+
+                <div class="product-details">
+                    <h3>DETALHES DO PRODUTO</h3>
+                    <ul>
+                        <li>• Casaco com capuz em material de alta qualidade</li>
+                        <li>• Corte moderno e elegante</li>
+                        <li>• Tecido resistente e confortável</li>
+                        <li>• Lavagem à máquina</li>
+                        <li>• Composição: 80% Algodão, 20% Poliéster</li>
+                    </ul>
+                </div>
+
+                <div class="shipping-info">
+                    <h3>ENVIOS E DEVOLUÇÕES</h3>
+                    <p>FRETE GRÁTIS A PARTIR DE R$ 200</p>
+                    <p>Entrega em até 5 dias úteis</p>
+                    <p>Troca e devolução em até 30 dias</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo/rodapé_logo.png" alt="Valeriano Logo" class="footer-logo-image">
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>INFORMAÇÕES ÚTEIS</h4>
+                        <ul>
+                            <li><a href="#rastreio">Rastreie seu pedido</a></li>
+                            <li><a href="#entrega">Política de Entrega</a></li>
+                            <li><a href="#pagamento">Formas de Pagamento</a></li>
+                            <li><a href="#troca">Política de Troca e Devolução</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>EXPLORE</h4>
+                        <ul>
+                            <li><a href="#feminino">Feminino</a></li>
+                            <li><a href="#masculino">Masculino</a></li>
+                            <li><a href="#infantil">Infantil</a></li>
+                            <li><a href="#ofertas">Oportunidades</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>ATENDIMENTO</h4>
+                        <ul>
+                            <li><a href="#contato">Contato</a></li>
+                            <li><a href="#duvidas">Dúvidas Frequentes</a></li>
+                            <li><a href="#tamanhos">Guia de Tamanhos</a></li>
+                            <li><a href="#cuidados">Cuidados com as Roupas</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>REDES SOCIAIS</h4>
+                        <ul>
+                            <li><a href="#instagram">Instagram</a></li>
+                            <li><a href="#facebook">Facebook</a></li>
+                            <li><a href="#twitter">Twitter</a></li>
+                            <li><a href="#youtube">YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Valeriano. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Funcionalidade da página de produto
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quantity controls
+            function decreaseQuantity() {
+                const quantityInput = document.getElementById('quantity');
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            }
+
+            function increaseQuantity() {
+                const quantityInput = document.getElementById('quantity');
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            }
+
+            // Size selection
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Color selection
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.addEventListener('click', function() {
+                    // Remover active de todos os swatches
+                    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+                    
+                    // Adicionar active ao clicado
+                    this.classList.add('active');
+                    
+                    // Atualizar texto da cor selecionada
+                    const colorName = this.getAttribute('data-color');
+                    const selectedColorSpan = document.querySelector('.selected-color');
+                    if (selectedColorSpan) {
+                        selectedColorSpan.textContent = colorName.charAt(0).toUpperCase() + colorName.slice(1);
+                    }
+                    
+                    console.log('Cor selecionada:', colorName);
+                });
+            });
+
+            // Favorite button
+            const favoriteBtn = document.querySelector('.btn-favorite');
+            favoriteBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const icon = this.querySelector('i');
+                
+                if (this.classList.contains('active')) {
+                    icon.className = 'fas fa-heart';
+                    this.innerHTML = '<i class="fas fa-heart"></i> REMOVIDO DOS FAVORITOS';
+                } else {
+                    icon.className = 'far fa-heart';
+                    this.innerHTML = '<i class="far fa-heart"></i> ADICIONAR AOS FAVORITOS';
+                }
+            });
+        });
+
+        // Global functions
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                quantityInput.value = value - 1;
+            }
+        }
+
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            let value = parseInt(quantityInput.value);
+            if (value < 10) {
+                quantityInput.value = value + 1;
+            }
+        }
+    </script>
+</body>
+</html>
