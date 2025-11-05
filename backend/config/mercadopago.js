@@ -1,9 +1,15 @@
 // Configuração do Mercado Pago
-const mercadopago = require('mercadopago');
+const { MercadoPagoConfig, Payment } = require('mercadopago');
 require('dotenv').config();
 
 // Configurar credenciais
-mercadopago.configurations.setAccessToken(process.env.MERCADOPAGO_ACCESS_TOKEN);
+const client = new MercadoPagoConfig({
+    accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN,
+    options: {
+        timeout: 5000,
+        idempotencyKey: 'abc'
+    }
+});
 
 // Configurar preferências adicionais
 if (process.env.MERCADOPAGO_MODE === 'sandbox') {
@@ -12,5 +18,9 @@ if (process.env.MERCADOPAGO_MODE === 'sandbox') {
     console.log('🚀 Modo PRODUÇÃO ativado');
 }
 
-module.exports = mercadopago;
+// Exportar cliente e Payment
+module.exports = {
+    client,
+    Payment
+};
 

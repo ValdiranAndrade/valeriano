@@ -1095,58 +1095,161 @@ async function processCardPayment(orderData, formData) {
 
 // Processar PIX
 async function processPixPayment(orderData) {
-    // Criar preferência de pagamento para PIX
-    const response = await fetch(`${API_BASE_URL}/payment/create-preference`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            ...orderData,
-            paymentType: 'pix'
-        })
-    });
-    
-    const result = await response.json();
-    
-    if (!result.success) {
-        throw new Error(result.error || 'Erro ao criar pagamento PIX');
+    try {
+        console.log('🚀 Iniciando processamento PIX...');
+        console.log('📦 Dados do pedido:', orderData);
+        
+        showNotification('Criando pagamento PIX...', 'info');
+        
+        // Criar preferência de pagamento para PIX
+        const requestUrl = `${API_BASE_URL}/payment/create-preference`;
+        console.log('📡 Fazendo requisição para:', requestUrl);
+        
+        const response = await fetch(requestUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ...orderData,
+                paymentType: 'pix'
+            })
+        });
+        
+        console.log('📥 Status da resposta:', response.status, response.statusText);
+        
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            console.error('❌ Erro na resposta:', errorData);
+            throw new Error(errorData.error || errorData.message || `Erro HTTP ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('✅ Resposta do backend para PIX:', result);
+        
+        if (!result.success) {
+            console.error('❌ Resposta indica falha:', result);
+            throw new Error(result.error || result.message || 'Erro ao criar pagamento PIX');
+        }
+        
+        // Determinar URL de checkout
+        // O backend retorna checkoutUrl (pronto para uso) ou initPoint/sandboxInitPoint
+        const checkoutUrl = result.checkoutUrl || result.initPoint || result.sandboxInitPoint || result.init_point || result.sandbox_init_point;
+        
+        console.log('🔗 URLs disponíveis:', {
+            checkoutUrl: result.checkoutUrl,
+            initPoint: result.initPoint,
+            sandboxInitPoint: result.sandboxInitPoint,
+            init_point: result.init_point,
+            sandbox_init_point: result.sandbox_init_point
+        });
+        
+        if (!checkoutUrl) {
+            console.error('❌ Nenhuma URL de checkout encontrada!');
+            console.error('Resposta completa do backend:', result);
+            throw new Error('URL de checkout não retornada pelo servidor. Verifique os logs do backend.');
+        }
+        
+        console.log('🌐 Redirecionando para:', checkoutUrl);
+        
+        // Salvar dados do pedido antes de redirecionar
+        const orderId = result.orderId || `order_${Date.now()}`;
+        const order = {
+            id: orderId,
+            date: new Date().toISOString(),
+            items: orderData.items.map(item => normalizeCartItem(item)),
+            total: orderData.total,
+            paymentMethod: 'pix',
+            preferenceId: result.preferenceId,
+            address: orderData.address,
+            contact: orderData.customer,
+            status: 'pending'
+        };
+        
+        saveOrder(order);
+        localStorage.setItem('currentOrderId', orderId);
+        
+        showNotification('Redirecionando para o pagamento PIX...', 'success');
+        
+        // Redirecionar para checkout do Mercado Pago
+        setTimeout(() => {
+            window.location.href = checkoutUrl;
+        }, 1000);
+        
+    } catch (error) {
+        console.error('Erro ao processar PIX:', error);
+        throw error;
     }
-    
-    // Redirecionar para checkout do Mercado Pago
-    const checkoutUrl = process.env.MERCADOPAGO_MODE === 'sandbox' 
-        ? result.sandboxInitPoint 
-        : result.initPoint;
-    
-    window.location.href = checkoutUrl;
 }
 
 // Processar Boleto
 async function processBoletoPayment(orderData) {
-    // Criar preferência de pagamento para Boleto
-    const response = await fetch(`${API_BASE_URL}/payment/create-preference`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            ...orderData,
-            paymentType: 'bolbradesco' // ou 'pec'
-        })
-    });
-    
-    const result = await response.json();
-    
-    if (!result.success) {
-        throw new Error(result.error || 'Erro ao criar boleto');
+    try {
+        showNotification('Gerando boleto...', 'info');
+        
+        // Criar preferência de pagamento para Boleto
+        const response = await fetch(`${API_BASE_URL}/payment/create-preference`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ...orderData,
+                paymentType: 'bolbradesco' // ou 'pec'
+            })
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || errorData.message || `Erro HTTP ${response.status}`);
+        }
+        
+        const result = await response.json();
+        
+        console.log('Resposta do backend para Boleto:', result);
+        
+        if (!result.success) {
+            throw new Error(result.error || result.message || 'Erro ao criar boleto');
+        }
+        
+        // Determinar URL de checkout
+        const checkoutUrl = result.checkoutUrl || result.initPoint || result.sandboxInitPoint || result.init_point || result.sandbox_init_point;
+        
+        if (!checkoutUrl) {
+            console.error('Resposta completa do backend:', result);
+            throw new Error('URL de checkout não retornada pelo servidor. Verifique os logs do backend.');
+        }
+        
+        console.log('Redirecionando para:', checkoutUrl);
+        
+        // Salvar dados do pedido antes de redirecionar
+        const orderId = result.orderId || `order_${Date.now()}`;
+        const order = {
+            id: orderId,
+            date: new Date().toISOString(),
+            items: orderData.items.map(item => normalizeCartItem(item)),
+            total: orderData.total,
+            paymentMethod: 'boleto',
+            preferenceId: result.preferenceId,
+            address: orderData.address,
+            contact: orderData.customer,
+            status: 'pending'
+        };
+        
+        saveOrder(order);
+        localStorage.setItem('currentOrderId', orderId);
+        
+        showNotification('Redirecionando para o boleto...', 'success');
+        
+        // Redirecionar para checkout do Mercado Pago
+        setTimeout(() => {
+            window.location.href = checkoutUrl;
+        }, 1000);
+        
+    } catch (error) {
+        console.error('Erro ao processar Boleto:', error);
+        throw error;
     }
-    
-    // Redirecionar para checkout do Mercado Pago
-    const checkoutUrl = process.env.MERCADOPAGO_MODE === 'sandbox' 
-        ? result.sandboxInitPoint 
-        : result.initPoint;
-    
-    window.location.href = checkoutUrl;
 }
 
 // Obter Public Key do backend

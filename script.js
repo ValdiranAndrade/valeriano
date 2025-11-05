@@ -80,12 +80,12 @@ function initHeroCarousel() {
         console.log('Indicadores encontrados:', indicators.length);
         
         if (slides.length === 0) {
-            console.error('ERRO: Nenhum slide encontrado!');
+            // Não é erro - algumas páginas não têm carrossel
             return;
         }
         
         if (indicators.length === 0) {
-            console.error('ERRO: Nenhum indicador encontrado!');
+            // Não é erro - algumas páginas não têm indicadores
             return;
         }
         

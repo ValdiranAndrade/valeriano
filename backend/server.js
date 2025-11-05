@@ -16,10 +16,35 @@ app.use(helmetConfig);
 app.use(apiLimiter);
 
 // Configurar CORS
+// Em desenvolvimento, aceitar múltiplas origens (incluindo file://)
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5500',
+    origin: function (origin, callback) {
+        // Lista de origens permitidas
+        const allowedOrigins = [
+            process.env.FRONTEND_URL || 'http://localhost:5500',
+            'http://localhost:5500',
+            'http://127.0.0.1:5500',
+            'http://localhost:8080',
+            'http://127.0.0.1:8080',
+            null // Permite file:// (abrir HTML direto)
+        ];
+        
+        // Em desenvolvimento, aceitar qualquer origem
+        if (process.env.NODE_ENV !== 'production') {
+            return callback(null, true);
+        }
+        
+        // Em produção, verificar origem
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Não permitido por CORS'));
+        }
+    },
     credentials: true,
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 app.use(cors(corsOptions));
 
