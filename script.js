@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     checkFavoritesState();
     initSearch();
     initWarningModal(); // Inicializar modal de aviso
+    initHamburgerMenu(); // Inicializar menu hamburger para mobile
     
     // Listener para atualizar favoritos quando removidos da página de favoritos
     window.addEventListener('message', function(event) {
@@ -200,6 +201,7 @@ function initShowcase() {
     console.log('Inicializando showcase de produtos...');
     
     const showcaseTrack = document.querySelector('.showcase-track');
+    const showcaseContainer = document.querySelector('.showcase-container');
     const productCards = document.querySelectorAll('.product-card');
     const prevBtn = document.querySelector('.showcase-nav.prev');
     const nextBtn = document.querySelector('.showcase-nav.next');
@@ -209,6 +211,9 @@ function initShowcase() {
         return;
     }
     
+    // Verificar se é mobile
+    const isMobile = window.innerWidth <= 768;
+    
     let currentIndex = 0;
     const cardsPerView = 3;
     const totalCards = productCards.length;
@@ -216,8 +221,18 @@ function initShowcase() {
     
     console.log('Cards encontrados:', totalCards);
     console.log('Cards por visualização:', cardsPerView);
+    console.log('É mobile:', isMobile);
     
     function updateShowcase() {
+        // No mobile, não usar transform, deixar o scroll nativo funcionar
+        if (isMobile) {
+            showcaseTrack.style.transform = 'none';
+            // Atualizar estado dos botões (opcional no mobile)
+            if (prevBtn) prevBtn.style.opacity = '0.3';
+            if (nextBtn) nextBtn.style.opacity = '0.3';
+            return;
+        }
+        
         const cardWidth = productCards[0].offsetWidth + 32; // width + gap
         const translateX = -currentIndex * cardWidth;
         showcaseTrack.style.transform = `translateX(${translateX}px)`;
@@ -230,6 +245,18 @@ function initShowcase() {
     }
     
     function moveShowcase(direction) {
+        // No mobile, usar scroll nativo
+        if (isMobile && showcaseContainer) {
+            const scrollAmount = showcaseContainer.offsetWidth * 0.8;
+            const currentScroll = showcaseContainer.scrollLeft;
+            const newScroll = currentScroll + (direction * scrollAmount);
+            showcaseContainer.scrollTo({
+                left: newScroll,
+                behavior: 'smooth'
+            });
+            return;
+        }
+        
         if (direction === -1 && currentIndex > 0) {
             currentIndex--;
         } else if (direction === 1 && currentIndex < maxIndex) {
@@ -244,6 +271,12 @@ function initShowcase() {
     }
     if (nextBtn) {
         nextBtn.addEventListener('click', () => moveShowcase(1));
+    }
+    
+    // No mobile, esconder os botões de navegação ou torná-los menos visíveis
+    if (isMobile) {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
     }
     
     // Funcionalidade dos botões de like
@@ -315,9 +348,25 @@ function initShowcase() {
 // Função global para o showcase (para uso nos botões HTML)
 function moveShowcase(direction) {
     const showcaseTrack = document.querySelector('.showcase-track');
+    const showcaseContainer = document.querySelector('.showcase-container');
     const productCards = document.querySelectorAll('.product-card');
     
     if (!showcaseTrack || !productCards.length) return;
+    
+    // Verificar se é mobile
+    const isMobile = window.innerWidth <= 768;
+    
+    // No mobile, usar scroll nativo
+    if (isMobile && showcaseContainer) {
+        const scrollAmount = showcaseContainer.offsetWidth * 0.8;
+        const currentScroll = showcaseContainer.scrollLeft;
+        const newScroll = currentScroll + (direction * scrollAmount);
+        showcaseContainer.scrollTo({
+            left: newScroll,
+            behavior: 'smooth'
+        });
+        return;
+    }
     
     let currentIndex = parseInt(showcaseTrack.dataset.currentIndex || '0');
     const cardsPerView = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
@@ -1248,4 +1297,48 @@ function updateUserIcon() {
 document.addEventListener('DOMContentLoaded', function() {
     updateUserIcon();
 });
+
+// Menu Hamburger para Mobile
+function initHamburgerMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mainNav = document.querySelector('.main-nav');
+    
+    if (!hamburger || !mainNav) {
+        return; // Elementos não encontrados, não fazer nada
+    }
+    
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        mainNav.classList.toggle('active');
+        
+        // Prevenir scroll do body quando menu estiver aberto
+        if (mainNav.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Fechar menu ao clicar em um link
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            mainNav.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Fechar menu ao clicar fora dele
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = mainNav.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+        
+        if (!isClickInsideNav && !isClickOnHamburger && mainNav.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            mainNav.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
 
