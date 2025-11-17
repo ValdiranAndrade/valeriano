@@ -2419,7 +2419,7 @@ body {
         padding: 0 20px;
         text-align: left;
         margin-left: 0;
-        margin-top: 220px;
+        margin-top: 320px;
     }
 
     .hero h1 {
@@ -2521,7 +2521,7 @@ body {
 
 @media (max-width: 480px) {
     .hero-content {
-        margin-top: 240px;
+        margin-top: 350px;
     }
     
     .hero h1 {
