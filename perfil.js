@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carregar dados do usuário
     loadUserData();
     
+    // Carregar pedidos do usuário
+    loadUserOrders();
+    
     // Inicializar funcionalidades do perfil
     initProfileFeatures();
 });
@@ -484,6 +487,11 @@ function showSection(sectionName) {
         targetSection.classList.add('active');
     }
     
+    // Recarregar pedidos se a seção de pedidos for exibida
+    if (sectionName === 'orders-section') {
+        loadUserOrders();
+    }
+    
     // Update navigation
     const navItems = document.querySelectorAll('.profile-nav-menu a');
     navItems.forEach(item => {
@@ -538,6 +546,176 @@ function showNotification(message, type = 'info') {
             }
         }, 300);
     }, 4000);
+}
+
+// ===== CARREGAR PEDIDOS DO USUÁRIO =====
+
+function loadUserOrders() {
+    const userId = localStorage.getItem('currentUserId');
+    
+    if (!userId) {
+        showNoOrdersMessage();
+        return;
+    }
+    
+    // Buscar todos os pedidos
+    const allOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    
+    // Filtrar pedidos do usuário logado
+    const userOrders = allOrders.filter(order => order.userId === userId);
+    
+    // Ordenar por data (mais recente primeiro)
+    userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // Renderizar pedidos
+    renderOrders(userOrders);
+}
+
+function renderOrders(orders) {
+    const ordersList = document.getElementById('orders-list');
+    const noOrdersMessage = document.getElementById('no-orders-message');
+    
+    if (!ordersList) return;
+    
+    // Limpar lista
+    ordersList.innerHTML = '';
+    
+    if (orders.length === 0) {
+        // Mostrar mensagem quando não houver pedidos
+        showNoOrdersMessage();
+        return;
+    }
+    
+    // Esconder mensagem de sem pedidos
+    if (noOrdersMessage) {
+        noOrdersMessage.style.display = 'none';
+    }
+    
+    // Renderizar cada pedido
+    orders.forEach(order => {
+        const orderItem = createOrderItem(order);
+        ordersList.appendChild(orderItem);
+    });
+}
+
+function createOrderItem(order) {
+    const orderDiv = document.createElement('div');
+    orderDiv.className = 'order-item';
+    
+    // Formatar data
+    const orderDate = new Date(order.date);
+    const formattedDate = orderDate.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    
+    // Formatar número do pedido
+    const orderNumber = order.id ? `#VAL-${order.id.slice(-6)}` : '#VAL-N/A';
+    
+    // Determinar status e classe CSS
+    let statusText = 'Pendente';
+    let statusClass = 'pending';
+    
+    if (order.status) {
+        switch(order.status.toLowerCase()) {
+            case 'confirmed':
+            case 'approved':
+                statusText = 'Confirmado';
+                statusClass = 'confirmed';
+                break;
+            case 'shipping':
+            case 'in_transit':
+                statusText = 'Em Trânsito';
+                statusClass = 'shipping';
+                break;
+            case 'delivered':
+                statusText = 'Entregue';
+                statusClass = 'delivered';
+                break;
+            case 'cancelled':
+            case 'rejected':
+                statusText = 'Cancelado';
+                statusClass = 'cancelled';
+                break;
+            default:
+                statusText = 'Pendente';
+                statusClass = 'pending';
+        }
+    }
+    
+    // Formatar total
+    const total = order.total ? `R$ ${parseFloat(order.total).toFixed(2).replace('.', ',')}` : 'R$ 0,00';
+    
+    orderDiv.innerHTML = `
+        <div class="order-info">
+            <div class="order-number">
+                <span class="label">Pedido:</span>
+                <span class="value">${orderNumber}</span>
+            </div>
+            <div class="order-date">
+                <span class="label">Data:</span>
+                <span class="value">${formattedDate}</span>
+            </div>
+            <div class="order-status">
+                <span class="status ${statusClass}">${statusText}</span>
+            </div>
+        </div>
+        <div class="order-total">
+            <span class="label">Total:</span>
+            <span class="value">${total}</span>
+        </div>
+        <div class="order-actions">
+            <button class="btn-view-order" onclick="viewOrderDetails('${order.id}')">Ver Detalhes</button>
+        </div>
+    `;
+    
+    return orderDiv;
+}
+
+function showNoOrdersMessage() {
+    const ordersList = document.getElementById('orders-list');
+    const noOrdersMessage = document.getElementById('no-orders-message');
+    
+    if (ordersList) {
+        ordersList.innerHTML = '';
+    }
+    
+    if (noOrdersMessage) {
+        noOrdersMessage.style.display = 'block';
+    }
+}
+
+function viewOrderDetails(orderId) {
+    // Buscar pedido
+    const allOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = allOrders.find(o => o.id === orderId);
+    
+    if (!order) {
+        showNotification('Pedido não encontrado', 'error');
+        return;
+    }
+    
+    // Criar mensagem com detalhes do pedido
+    let details = `Pedido: #VAL-${orderId.slice(-6)}\n\n`;
+    details += `Data: ${new Date(order.date).toLocaleDateString('pt-BR')}\n`;
+    details += `Total: R$ ${parseFloat(order.total || 0).toFixed(2).replace('.', ',')}\n\n`;
+    
+    if (order.items && order.items.length > 0) {
+        details += 'Itens:\n';
+        order.items.forEach(item => {
+            details += `- ${item.name || item.title || 'Produto'} (${item.quantity || 1}x) - R$ ${parseFloat(item.price || 0).toFixed(2).replace('.', ',')}\n`;
+        });
+    }
+    
+    if (order.address) {
+        details += `\nEndereço de entrega:\n`;
+        details += `${order.address.rua || ''}, ${order.address.numero || ''}\n`;
+        details += `${order.address.bairro || ''}, ${order.address.cidade || ''} - ${order.address.estado || ''}\n`;
+        details += `CEP: ${order.address.cep || ''}\n`;
+    }
+    
+    alert(details);
 }
 
 // ===== FUNÇÕES AUXILIARES =====

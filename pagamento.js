@@ -1364,6 +1364,12 @@ function createOrder(formData, paymentMethod) {
 }
 
 function saveOrder(order) {
+    // Vincular pedido ao usuário logado
+    const userId = localStorage.getItem('currentUserId');
+    if (userId) {
+        order.userId = userId;
+    }
+    
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
     orders.push(order);
     localStorage.setItem('orders', JSON.stringify(orders));

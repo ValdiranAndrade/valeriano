@@ -179,6 +179,19 @@ router.post('/create-preference', paymentLimiter, async (req, res) => {
 // Processar pagamento com cartão (API direta)
 router.post('/process', paymentLimiter, async (req, res) => {
     try {
+        // Verificar se está em produção e validar credenciais
+        const mode = process.env.MERCADOPAGO_MODE;
+        if (mode === 'production') {
+            const accessToken = process.env.MERCADOPAGO_ACCESS_TOKEN;
+            if (!accessToken || accessToken.startsWith('TEST-')) {
+                return res.status(500).json({
+                    success: false,
+                    error: 'Configuração inválida para produção',
+                    message: 'Credenciais de teste não podem ser usadas em produção'
+                });
+            }
+        }
+        
         const { orderData, paymentData } = req.body;
         
         // Validar dados
@@ -222,6 +235,13 @@ router.post('/process', paymentLimiter, async (req, res) => {
         
         const orderId = payment.external_reference;
         
+        // Log do pagamento (sem dados sensíveis)
+        if (mode === 'production') {
+            console.log(`💰 PAGAMENTO REAL processado - ID: ${response.id}, Status: ${response.status}, Valor: R$ ${orderData.total}`);
+        } else {
+            console.log(`🧪 Pagamento de teste processado - ID: ${response.id}, Status: ${response.status}`);
+        }
+        
         if (response.status === 'approved' || response.status === 'pending' || response.status === 'in_process') {
             const paymentStatus = response.status;
             
@@ -248,6 +268,11 @@ router.post('/process', paymentLimiter, async (req, res) => {
                 message: getStatusMessage(paymentStatus)
             });
         } else {
+            // Log de pagamento recusado
+            if (mode === 'production') {
+                console.warn(`⚠️  PAGAMENTO REAL RECUSADO - ID: ${response.id}, Motivo: ${response.message || 'Desconhecido'}`);
+            }
+            
             res.status(400).json({
                 success: false,
                 error: 'Pagamento recusado',

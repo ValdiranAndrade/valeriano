@@ -189,52 +189,13 @@
                             <h2>Meus Pedidos</h2>
                         </div>
 
-                        <div class="orders-list">
-                            <div class="order-item">
-                                <div class="order-info">
-                                    <div class="order-number">
-                                        <span class="label">Pedido:</span>
-                                        <span class="value">#VAL-2024-001</span>
-                                    </div>
-                                    <div class="order-date">
-                                        <span class="label">Data:</span>
-                                        <span class="value">15/01/2024</span>
-                                    </div>
-                                    <div class="order-status">
-                                        <span class="status delivered">Entregue</span>
-                                    </div>
-                                </div>
-                                <div class="order-total">
-                                    <span class="label">Total:</span>
-                                    <span class="value">R$ 299,90</span>
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn-view-order">Ver Detalhes</button>
-                                </div>
-                            </div>
-
-                            <div class="order-item">
-                                <div class="order-info">
-                                    <div class="order-number">
-                                        <span class="label">Pedido:</span>
-                                        <span class="value">#VAL-2024-002</span>
-                                    </div>
-                                    <div class="order-date">
-                                        <span class="label">Data:</span>
-                                        <span class="value">20/01/2024</span>
-                                    </div>
-                                    <div class="order-status">
-                                        <span class="status shipping">Em Trânsito</span>
-                                    </div>
-                                </div>
-                                <div class="order-total">
-                                    <span class="label">Total:</span>
-                                    <span class="value">R$ 189,90</span>
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn-view-order">Ver Detalhes</button>
-                                </div>
-                            </div>
+                        <div class="orders-list" id="orders-list">
+                            <!-- Pedidos serão carregados dinamicamente aqui -->
+                        </div>
+                        
+                        <div class="no-orders-message" id="no-orders-message" style="display: none;">
+                            <p>Você ainda não realizou nenhum pedido.</p>
+                            <a href="index.html" class="btn-catalog">Ver Produtos</a>
                         </div>
                     </div>
 
@@ -354,7 +315,7 @@
                     <a href="#contato">Contato</a>
                 </div>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/usevaleriano?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>

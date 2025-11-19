@@ -197,6 +197,9 @@ function initHeroCarousel() {
 }
 
 // Showcase de Produtos
+// Variável global para o índice do showcase
+let showcaseCurrentIndex = 0;
+
 function initShowcase() {
     console.log('Inicializando showcase de produtos...');
     
@@ -214,7 +217,7 @@ function initShowcase() {
     // Verificar se é mobile
     const isMobile = window.innerWidth <= 768;
     
-    let currentIndex = 0;
+    showcaseCurrentIndex = 0;
     const cardsPerView = 3;
     const totalCards = productCards.length;
     const maxIndex = Math.max(0, totalCards - cardsPerView);
@@ -234,35 +237,14 @@ function initShowcase() {
         }
         
         const cardWidth = productCards[0].offsetWidth + 32; // width + gap
-        const translateX = -currentIndex * cardWidth;
+        const translateX = -showcaseCurrentIndex * cardWidth;
         showcaseTrack.style.transform = `translateX(${translateX}px)`;
         
         // Atualizar estado dos botões
-        if (prevBtn) prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        if (nextBtn) nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+        if (prevBtn) prevBtn.style.opacity = showcaseCurrentIndex === 0 ? '0.5' : '1';
+        if (nextBtn) nextBtn.style.opacity = showcaseCurrentIndex >= maxIndex ? '0.5' : '1';
         
-        console.log('Showcase atualizado - índice:', currentIndex);
-    }
-    
-    function moveShowcase(direction) {
-        // No mobile, usar scroll nativo
-        if (isMobile && showcaseContainer) {
-            const scrollAmount = showcaseContainer.offsetWidth * 0.8;
-            const currentScroll = showcaseContainer.scrollLeft;
-            const newScroll = currentScroll + (direction * scrollAmount);
-            showcaseContainer.scrollTo({
-                left: newScroll,
-                behavior: 'smooth'
-            });
-            return;
-        }
-        
-        if (direction === -1 && currentIndex > 0) {
-            currentIndex--;
-        } else if (direction === 1 && currentIndex < maxIndex) {
-            currentIndex++;
-        }
-        updateShowcase();
+        console.log('Showcase atualizado - índice:', showcaseCurrentIndex);
     }
     
     // Event listeners
@@ -368,28 +350,26 @@ function moveShowcase(direction) {
         return;
     }
     
-    let currentIndex = parseInt(showcaseTrack.dataset.currentIndex || '0');
-    const cardsPerView = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+    const cardsPerView = 3;
     const totalCards = productCards.length;
     const maxIndex = Math.max(0, totalCards - cardsPerView);
     
-    if (direction === -1 && currentIndex > 0) {
-        currentIndex--;
-    } else if (direction === 1 && currentIndex < maxIndex) {
-        currentIndex++;
+    if (direction === -1 && showcaseCurrentIndex > 0) {
+        showcaseCurrentIndex--;
+    } else if (direction === 1 && showcaseCurrentIndex < maxIndex) {
+        showcaseCurrentIndex++;
     }
     
     const cardWidth = productCards[0].offsetWidth + 32;
-    const translateX = -currentIndex * cardWidth;
+    const translateX = -showcaseCurrentIndex * cardWidth;
     showcaseTrack.style.transform = `translateX(${translateX}px)`;
-    showcaseTrack.dataset.currentIndex = currentIndex;
     
     // Atualizar estado dos botões
     const prevBtn = document.querySelector('.showcase-nav.prev');
     const nextBtn = document.querySelector('.showcase-nav.next');
     
-    if (prevBtn) prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-    if (nextBtn) nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+    if (prevBtn) prevBtn.style.opacity = showcaseCurrentIndex === 0 ? '0.5' : '1';
+    if (nextBtn) nextBtn.style.opacity = showcaseCurrentIndex >= maxIndex ? '0.5' : '1';
 }
 
 // Verificar logo do rodapé
@@ -669,47 +649,123 @@ function initSearch() {
     }
 }
 
+// Lista de produtos disponíveis em todas as páginas
+const produtosDisponiveis = [
+    { nome: 'camiseta', nomeExibicao: 'Camiseta', pagina: 'camisetas.html', termos: ['camiseta', 'camisa', 'blusa'] },
+    { nome: 'camiseta oversize', nomeExibicao: 'Camiseta Oversize', pagina: 'produto.html', termos: ['camiseta oversize', 'oversize', 'camiseta grande'] },
+    { nome: 'shorts', nomeExibicao: 'Shorts', pagina: 'SHORTZIN.html', termos: ['shorts', 'bermuda', 'short'] },
+    { nome: 'casaco', nomeExibicao: 'Casaco', pagina: 'casacos.html', termos: ['casaco', 'jaqueta', 'blusa de frio'] },
+    { nome: 'casaco sem capuz', nomeExibicao: 'Casaco sem Capuz', pagina: 'casacosemcapuz.html', termos: ['casaco sem capuz', 'casaco', 'sem capuz'] },
+    { nome: 'casaco com capuz', nomeExibicao: 'Casaco com Capuz', pagina: 'casacocomcapuz.html', termos: ['casaco com capuz', 'casaco', 'com capuz', 'moletom'] },
+    { nome: 'boné', nomeExibicao: 'Boné', pagina: 'Catalogo_Boné.html', termos: ['boné', 'bone', 'chapeu', 'chapéu'] }
+];
+
 function performSearch() {
     const searchInput = document.getElementById('searchInput');
-    const searchTerm = searchInput.value.trim();
+    const searchTerm = searchInput.value.trim().toLowerCase();
     
     if (!searchTerm) {
         return;
     }
     
-    // Buscar produtos na página atual
+    // Primeiro, tentar buscar produtos na página atual
     const productCards = document.querySelectorAll('.product-card');
     let foundProduct = null;
     
     productCards.forEach(card => {
-        const productName = card.querySelector('h3').textContent.toLowerCase();
-        const productTitle = card.querySelector('h3').textContent;
+        const productName = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const productLink = card.closest('a') || card.querySelector('a');
         
-        if (productName.includes(searchTerm.toLowerCase())) {
-            foundProduct = card;
+        if (productName.includes(searchTerm)) {
+            foundProduct = { card, link: productLink };
         }
     });
     
-    if (foundProduct) {
-        // Scroll suave para o produto encontrado
-        foundProduct.scrollIntoView({ 
+    // Se encontrou na página atual, destacar e rolar até ele
+    if (foundProduct && foundProduct.card) {
+        foundProduct.card.scrollIntoView({ 
             behavior: 'smooth', 
             block: 'center' 
         });
         
         // Destacar o produto encontrado
-        foundProduct.style.border = '3px solid #000';
-        foundProduct.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.3)';
+        foundProduct.card.style.border = '3px solid #000';
+        foundProduct.card.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.3)';
         
         // Remover destaque após 3 segundos
         setTimeout(() => {
-            foundProduct.style.border = '';
-            foundProduct.style.boxShadow = '';
+            foundProduct.card.style.border = '';
+            foundProduct.card.style.boxShadow = '';
         }, 3000);
         
         // Limpar o campo de pesquisa
-        searchInput.value = '';
+        if (searchInput) {
+            searchInput.value = '';
+        }
+        return;
     }
+    
+    // Se não encontrou na página atual, buscar em todas as páginas
+    const produtoEncontrado = produtosDisponiveis.find(produto => {
+        // Verificar se o termo de busca corresponde ao nome ou aos termos de busca
+        return produto.nome.toLowerCase().includes(searchTerm) ||
+               produto.termos.some(termo => termo.toLowerCase().includes(searchTerm)) ||
+               searchTerm.includes(produto.nome.toLowerCase());
+    });
+    
+    if (produtoEncontrado) {
+        // Redirecionar para a página do produto
+        window.location.href = produtoEncontrado.pagina;
+    } else {
+        // Se não encontrou nenhum produto, mostrar mensagem
+        showSearchNotification('Produto não encontrado. Tente buscar por: Camiseta, Shorts, Casaco ou Boné', 'info');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+    }
+}
+
+// Função para mostrar notificação de pesquisa
+function showSearchNotification(message, type = 'info') {
+    // Criar elemento de notificação
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    // Estilos da notificação
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#007bff'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        z-index: 10000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        max-width: 300px;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animar entrada
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remover após 4 segundos
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 4000);
 }
 
 // Modal de Aviso

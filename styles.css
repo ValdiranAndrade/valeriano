@@ -501,29 +501,6 @@ body {
     color: #666;
 }
 
-.sort-group {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.sort-group label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #000;
-    text-transform: uppercase;
-}
-
-.sort-select {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 0;
-    background: #fff;
-    font-size: 0.9rem;
-    color: #000;
-    min-width: 200px;
-    cursor: pointer;
-}
 
 .products-grid-section {
     padding: 3rem 0;
@@ -1151,6 +1128,14 @@ body {
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .search-icon {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
 .search-icon i {
@@ -2326,18 +2311,23 @@ body {
         margin: 3px 0;
         transition: 0.3s;
         display: block;
+        transform-origin: center center;
     }
     
     .hamburger.active span:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
+        margin: 0;
+        transform: translateY(9px) rotate(45deg);
     }
     
     .hamburger.active span:nth-child(2) {
         opacity: 0;
+        transform: scale(0);
+        margin: 0;
     }
     
     .hamburger.active span:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
+        margin: 0;
+        transform: translateY(-9px) rotate(-45deg);
     }
     
     .dropdown-content {
@@ -2363,27 +2353,35 @@ body {
     .nav-container {
         justify-content: space-between;
         position: relative;
+        gap: 0;
+        padding: 0 1rem;
     }
     
     .nav-icons {
         display: none;
     }
     
+    .logo {
+        order: 1;
+        flex: 0 0 auto;
+        z-index: 2;
+    }
+    
     .search-icon {
-        position: absolute;
-        left: calc(50% + 40px);
-        transform: translateX(-50%);
         order: 2;
+        position: absolute;
+        left: calc(50% + 10px);
+        transform: translateX(-50%);
+        flex: 0 0 auto;
+        max-width: 180px;
+        z-index: 1;
     }
     
     .hamburger {
         order: 3;
-        margin-left: auto;
-    }
-    
-    .logo {
-        order: 1;
         flex: 0 0 auto;
+        margin-left: auto;
+        z-index: 2;
     }
     
     .mobile-only {
@@ -2520,6 +2518,39 @@ body {
 }
 
 @media (max-width: 480px) {
+    .nav-container {
+        gap: 0.5rem;
+        padding: 0 0.75rem;
+    }
+    
+    .logo {
+        max-width: 120px;
+    }
+    
+    .logo-image {
+        height: 30px;
+        max-width: 120px;
+    }
+    
+    .search-icon {
+        max-width: 150px;
+        min-width: 120px;
+    }
+    
+    .search-field {
+        min-width: 120px;
+        max-width: 150px;
+        padding: 5px 10px;
+    }
+    
+    .search-field input {
+        font-size: 0.85rem;
+    }
+    
+    .hamburger {
+        padding: 0.4rem;
+    }
+    
     .hero-content {
         margin-top: 350px;
     }
@@ -4901,6 +4932,21 @@ html {
     color: #856404;
 }
 
+.status.pending {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+.status.confirmed {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.status.cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
 .order-total {
     text-align: center;
 }
@@ -4933,6 +4979,38 @@ html {
 
 .btn-view-order:hover {
     background: #333;
+}
+
+/* No Orders Message */
+.no-orders-message {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.no-orders-message p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.no-orders-message .btn-catalog {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #BB4430;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease;
+}
+
+.no-orders-message .btn-catalog:hover {
+    background: #a03a28;
 }
 
 /* Addresses Section */

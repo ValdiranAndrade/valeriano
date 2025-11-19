@@ -193,6 +193,7 @@ function initCadastroForm() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             processarCadastro();
+            // O formulário também será enviado para o Formspree após processar localmente
         });
         
         // Validação em tempo real
@@ -425,6 +426,13 @@ function processarCadastro() {
     // Salvar usuário
     salvarUsuario(usuario);
     
+    // Adicionar campos ocultos para Formspree (para melhor formatação do email)
+    adicionarCamposFormspree(form, usuario);
+    
+    // Enviar formulário para Formspree (usando submit nativo)
+    // Criar um formulário temporário para enviar para Formspree sem redirecionar
+    enviarParaFormspree(usuario);
+    
     // Mostrar sucesso
     showNotification('Cadastro realizado com sucesso!', 'success');
     
@@ -449,6 +457,104 @@ function salvarUsuario(usuario) {
     localStorage.setItem('userName', usuario.nome);
     
     console.log('Usuário cadastrado:', usuario);
+}
+
+// ===== ENVIAR PARA FORMSPREE =====
+
+function adicionarCamposFormspree(form, usuario) {
+    // Adicionar campo oculto para assunto do email
+    let subjectField = form.querySelector('input[name="_subject"]');
+    if (!subjectField) {
+        subjectField = document.createElement('input');
+        subjectField.type = 'hidden';
+        subjectField.name = '_subject';
+        form.appendChild(subjectField);
+    }
+    subjectField.value = 'Novo Cadastro - Valeriano';
+    
+    // Adicionar campo oculto para formatação do email
+    let messageField = form.querySelector('textarea[name="mensagem"]');
+    if (!messageField) {
+        messageField = document.createElement('textarea');
+        messageField.type = 'hidden';
+        messageField.name = 'mensagem';
+        messageField.style.display = 'none';
+        form.appendChild(messageField);
+    }
+    messageField.value = `Novo cadastro realizado na loja Valeriano.
+
+Dados do cliente:
+Nome: ${usuario.nome}
+Email: ${usuario.email}
+CPF: ${usuario.cpf}
+Telefone: ${usuario.telefone}
+Data de Nascimento: ${usuario.dataNascimento}
+
+Endereço:
+${usuario.endereco.rua}, ${usuario.endereco.numero}${usuario.endereco.complemento ? ' - ' + usuario.endereco.complemento : ''}
+${usuario.endereco.bairro}, ${usuario.endereco.cidade} - ${usuario.endereco.estado}
+CEP: ${usuario.endereco.cep}
+
+Newsletter: ${usuario.aceitarNewsletter ? 'Sim' : 'Não'}
+Data do Cadastro: ${new Date(usuario.dataCadastro).toLocaleString('pt-BR')}`;
+}
+
+async function enviarParaFormspree(usuario) {
+    try {
+        // Criar um formulário temporário para enviar via fetch (sem redirecionar)
+        const formData = new FormData();
+        
+        // Adicionar todos os campos do formulário
+        formData.append('_subject', 'Novo Cadastro - Valeriano');
+        formData.append('nome', usuario.nome);
+        formData.append('email', usuario.email);
+        formData.append('cpf', usuario.cpf);
+        formData.append('telefone', usuario.telefone);
+        formData.append('dataNascimento', usuario.dataNascimento);
+        formData.append('rua', usuario.endereco.rua);
+        formData.append('numero', usuario.endereco.numero);
+        formData.append('complemento', usuario.endereco.complemento || '');
+        formData.append('bairro', usuario.endereco.bairro);
+        formData.append('cidade', usuario.endereco.cidade);
+        formData.append('estado', usuario.endereco.estado);
+        formData.append('cep', usuario.endereco.cep);
+        formData.append('newsletter', usuario.aceitarNewsletter ? 'Sim' : 'Não');
+        formData.append('dataCadastro', new Date(usuario.dataCadastro).toLocaleString('pt-BR'));
+        formData.append('mensagem', `Novo cadastro realizado na loja Valeriano.
+
+Dados do cliente:
+Nome: ${usuario.nome}
+Email: ${usuario.email}
+CPF: ${usuario.cpf}
+Telefone: ${usuario.telefone}
+Data de Nascimento: ${usuario.dataNascimento}
+
+Endereço:
+${usuario.endereco.rua}, ${usuario.endereco.numero}${usuario.endereco.complemento ? ' - ' + usuario.endereco.complemento : ''}
+${usuario.endereco.bairro}, ${usuario.endereco.cidade} - ${usuario.endereco.estado}
+CEP: ${usuario.endereco.cep}
+
+Newsletter: ${usuario.aceitarNewsletter ? 'Sim' : 'Não'}
+Data do Cadastro: ${new Date(usuario.dataCadastro).toLocaleString('pt-BR')}`);
+        
+        // Enviar para Formspree
+        const response = await fetch('https://formspree.io/f/xyzlrgve', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            console.log('Email enviado com sucesso para Formspree');
+        } else {
+            console.error('Erro ao enviar email para Formspree:', response.status);
+        }
+    } catch (error) {
+        console.error('Erro ao enviar email via Formspree:', error);
+        // Não mostrar erro para o usuário, pois o cadastro já foi realizado
+    }
 }
 
 // ===== NOTIFICAÇÕES =====

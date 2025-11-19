@@ -12,10 +12,18 @@ const client = new MercadoPagoConfig({
 });
 
 // Configurar preferências adicionais
-if (process.env.MERCADOPAGO_MODE === 'sandbox') {
-    console.log('🔧 Modo SANDBOX (Teste) ativado');
+const mode = process.env.MERCADOPAGO_MODE || 'sandbox';
+const accessToken = process.env.MERCADOPAGO_ACCESS_TOKEN || '';
+
+if (mode === 'production') {
+    // Validar credenciais de produção
+    if (accessToken.startsWith('TEST-')) {
+        console.error('❌ ERRO: Modo PRODUÇÃO mas usando credenciais de TESTE!');
+        throw new Error('Credenciais de teste não podem ser usadas em produção');
+    }
+    console.log('🚀 Modo PRODUÇÃO ativado - Pagamentos REAIS');
 } else {
-    console.log('🚀 Modo PRODUÇÃO ativado');
+    console.log('🔧 Modo SANDBOX (Teste) ativado');
 }
 
 // Exportar cliente e Payment

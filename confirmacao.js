@@ -168,29 +168,6 @@ function updateCartCount() {
 }
 
 // ===== FUNÇÕES DE BUSCA =====
-
-function performSearch() {
-    const searchInput = document.getElementById('searchInput');
-    const searchTerm = searchInput.value.trim();
-    
-    if (searchTerm) {
-        // Salvar termo de busca
-        localStorage.setItem('searchTerm', searchTerm);
-        
-        // Redirecionar para página de resultados
-        window.location.href = 'index.html';
-    }
-}
-
-// Configurar busca ao pressionar Enter
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
-            }
-        });
-    }
-});
+// A função performSearch() está definida em script.js e funciona globalmente
+// Não é necessário redefinir aqui, pois script.js já é carregado antes
 
