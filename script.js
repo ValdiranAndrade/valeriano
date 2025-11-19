@@ -255,12 +255,6 @@ function initShowcase() {
         nextBtn.addEventListener('click', () => moveShowcase(1));
     }
     
-    // No mobile, esconder os botões de navegação ou torná-los menos visíveis
-    if (isMobile) {
-        if (prevBtn) prevBtn.style.display = 'none';
-        if (nextBtn) nextBtn.style.display = 'none';
-    }
-    
     // Funcionalidade dos botões de like
     const likeButtons = document.querySelectorAll('.like-btn');
     likeButtons.forEach(button => {
@@ -340,7 +334,8 @@ function moveShowcase(direction) {
     
     // No mobile, usar scroll nativo
     if (isMobile && showcaseContainer) {
-        const scrollAmount = showcaseContainer.offsetWidth * 0.8;
+        const cardWidth = productCards[0].offsetWidth + 24; // width + gap (1.5rem = 24px)
+        const scrollAmount = cardWidth;
         const currentScroll = showcaseContainer.scrollLeft;
         const newScroll = currentScroll + (direction * scrollAmount);
         showcaseContainer.scrollTo({
