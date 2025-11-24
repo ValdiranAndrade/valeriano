@@ -825,6 +825,14 @@ let cartItems = [];
 
 // Função para adicionar produto ao carrinho
 function addToCart(product) {
+    // Verificar se o usuário está logado
+    const isLoggedIn = localStorage.getItem('userLoggedIn');
+    if (!isLoggedIn) {
+        // Redirecionar para cadastro se não estiver logado
+        window.location.href = 'cadastro.html';
+        return;
+    }
+    
     const existingItem = cartItems.find(item => 
         item.id === product.id && 
         item.color === product.color && 
@@ -1208,6 +1216,14 @@ function updateItemsCount() {
 
 // Função para adicionar produto ao carrinho e redirecionar
 function addToCartAndRedirect() {
+    // Verificar se o usuário está logado
+    const isLoggedIn = localStorage.getItem('userLoggedIn');
+    if (!isLoggedIn) {
+        // Redirecionar para cadastro se não estiver logado
+        window.location.href = 'cadastro.html';
+        return;
+    }
+    
     // Detectar informações do produto baseado na página atual
     let productInfo = {};
     
@@ -1354,13 +1370,54 @@ function initHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
     const mainNav = document.querySelector('.main-nav');
     
+    console.log('🔍 Inicializando menu hambúrguer...');
+    console.log('Hambúrguer encontrado:', hamburger);
+    console.log('Menu principal encontrado:', mainNav);
+    
     if (!hamburger || !mainNav) {
+        console.warn('⚠️ Hambúrguer ou menu principal não encontrado!');
         return; // Elementos não encontrados, não fazer nada
     }
     
+    // Verificar se a imagem existe, se não existir, criar dinamicamente
+    let closeIcon = hamburger.querySelector('.hamburger-close-icon');
+    if (!closeIcon) {
+        console.log('📸 Imagem não encontrada, criando dinamicamente...');
+        closeIcon = document.createElement('img');
+        closeIcon.src = 'logo/v.png';
+        closeIcon.alt = 'Fechar menu';
+        closeIcon.className = 'hamburger-close-icon';
+        hamburger.appendChild(closeIcon);
+        console.log('✅ Imagem criada e adicionada ao hambúrguer');
+    } else {
+        console.log('✅ Imagem já existe no HTML');
+    }
+    
     hamburger.addEventListener('click', function() {
+        console.log('🍔 Hambúrguer clicado!');
         hamburger.classList.toggle('active');
         mainNav.classList.toggle('active');
+        
+        // Verificar se a classe foi adicionada
+        const isActive = hamburger.classList.contains('active');
+        console.log('✅ Classe "active" no hambúrguer:', isActive);
+        console.log('📸 Imagem deve estar visível:', isActive);
+        
+        // Verificar se a imagem existe (buscar novamente para garantir)
+        const closeIconCheck = hamburger.querySelector('.hamburger-close-icon');
+        console.log('🖼️ Imagem encontrada:', closeIconCheck);
+        if (closeIconCheck && isActive) {
+            console.log('📏 Estilos da imagem:', {
+                display: window.getComputedStyle(closeIconCheck).display,
+                opacity: window.getComputedStyle(closeIconCheck).opacity,
+                visibility: window.getComputedStyle(closeIconCheck).visibility,
+                zIndex: window.getComputedStyle(closeIconCheck).zIndex,
+                width: window.getComputedStyle(closeIconCheck).width,
+                height: window.getComputedStyle(closeIconCheck).height
+            });
+        } else if (!closeIconCheck) {
+            console.error('❌ Imagem ainda não encontrada após criação!');
+        }
         
         // Prevenir scroll do body quando menu estiver aberto
         if (mainNav.classList.contains('active')) {
@@ -1373,10 +1430,22 @@ function initHamburgerMenu() {
     // Fechar menu ao clicar em um link
     const navLinks = mainNav.querySelectorAll('a');
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            mainNav.classList.remove('active');
-            document.body.style.overflow = '';
+        link.addEventListener('click', function(e) {
+            // Garantir que o link funcione normalmente
+            const href = link.getAttribute('href');
+            if (href && href !== '#' && href !== 'javascript:void(0)') {
+                // Fechar menu imediatamente
+                hamburger.classList.remove('active');
+                mainNav.classList.remove('active');
+                document.body.style.overflow = '';
+                // O navegador seguirá o link normalmente
+            } else {
+                // Se não houver href válido, prevenir comportamento padrão
+                e.preventDefault();
+                hamburger.classList.remove('active');
+                mainNav.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
     });
     

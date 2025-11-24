@@ -233,6 +233,10 @@ body {
 }
 
 /* Estilos específicos para SHORTS (branco) */
+.shorts-text {
+    bottom: calc(10% + 170px) !important;
+}
+
 .shorts-text h2,
 .shorts-text .image-cta {
     color: #fff;
@@ -243,6 +247,10 @@ body {
 }
 
 /* Estilos específicos para CASACO (preto) */
+.casaco-text {
+    bottom: calc(10% + 170px) !important;
+}
+
 .casaco-text h2,
 .casaco-text .image-cta {
     color: #000;
@@ -277,6 +285,14 @@ body {
     
     .image-cta {
         font-size: 1rem;
+    }
+    
+    .shorts-text {
+        bottom: calc(10% + 100px) !important;
+    }
+    
+    .casaco-text {
+        bottom: calc(10% + 100px) !important;
     }
 }
 
@@ -1034,8 +1050,15 @@ body {
 .hamburger {
     display: none;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     padding: 0.5rem;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
 }
 
 .hamburger span {
@@ -1045,7 +1068,43 @@ body {
     margin: 3px 0;
     transition: 0.3s;
     display: block;
+    transform-origin: center center;
 }
+
+.hamburger-close-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    transition: 0.3s;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: auto;
+}
+
+/* Debug: garantir que a imagem apareça quando hambúrguer está ativo */
+.hamburger.active .hamburger-close-icon {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.hamburger.active span {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 
 .nav-icons {
     display: flex;
@@ -1921,7 +1980,7 @@ body {
     position: relative;
     height: 350px;
     overflow: hidden;
-    background: #f8f8f8;
+    background: #fff;
 }
 
 .product-image img {
@@ -1984,6 +2043,7 @@ body {
 .product-info {
     padding: 1.5rem;
     text-align: center;
+    border-top: none;
 }
 
 .product-info h3 {
@@ -2300,8 +2360,15 @@ body {
     .hamburger {
         display: block;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
         padding: 0.5rem;
+        position: relative;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
     }
     
     .hamburger span {
@@ -2314,20 +2381,36 @@ body {
         transform-origin: center center;
     }
     
-    .hamburger.active span:nth-child(1) {
-        margin: 0;
-        transform: translateY(9px) rotate(45deg);
+    .hamburger-close-icon {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        transition: 0.3s;
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
     }
     
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-        transform: scale(0);
-        margin: 0;
+    .hamburger.active span {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
-    .hamburger.active span:nth-child(3) {
-        margin: 0;
-        transform: translateY(-9px) rotate(-45deg);
+    .hamburger.active .hamburger-close-icon {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        z-index: 10 !important;
+        pointer-events: auto !important;
+        transform: translate(-50%, -50%) !important;
     }
     
     .dropdown-content {
@@ -2742,6 +2825,8 @@ html {
     flex: 1;
     max-width: 600px;
     z-index: 3;
+    margin-top: 790px;
+    margin-left: -360px;
 }
 
 .banner-text h2 {
@@ -2834,6 +2919,8 @@ html {
     .banner-text {
         max-width: 100%;
         z-index: 3;
+        margin-top: 470px;
+        margin-left: -185px;
     }
     
     .banner-text h2 {
@@ -2870,6 +2957,8 @@ html {
     
     .banner-text {
         padding: 0;
+        margin-top: 320px;
+        margin-left: -113px;
     }
     
     .banner-text h2 {

@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializePaymentPage() {
+    // Verificar se o usuário está logado
+    const isLoggedIn = localStorage.getItem('userLoggedIn');
+    if (!isLoggedIn) {
+        // Redirecionar para cadastro se não estiver logado
+        window.location.href = 'cadastro.html';
+        return;
+    }
+    
     // Carregar dados do carrinho
     loadCartData();
     
