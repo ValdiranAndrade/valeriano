@@ -162,42 +162,8 @@
                     <img src="logo/rodapé_logo.png" alt="Valeriano Logo" class="footer-logo-image">
                 </div>
                 <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>INFORMAÇÕES ÚTEIS</h4>
-                        <ul>
-                            <li><a href="#rastreio">Rastreie seu pedido</a></li>
-                            <li><a href="#entrega">Política de Entrega</a></li>
-                            <li><a href="#pagamento">Formas de Pagamento</a></li>
-                            <li><a href="#troca">Política de Troca e Devolução</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>EXPLORE</h4>
-                        <ul>
-                            <li><a href="#feminino">Feminino</a></li>
-                            <li><a href="#masculino">Masculino</a></li>
-                            <li><a href="#infantil">Infantil</a></li>
-                            <li><a href="#ofertas">Oportunidades</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>ATENDIMENTO</h4>
-                        <ul>
-                            <li><a href="#contato">Contato</a></li>
-                            <li><a href="#duvidas">Dúvidas Frequentes</a></li>
-                            <li><a href="#tamanhos">Guia de Tamanhos</a></li>
-                            <li><a href="#cuidados">Cuidados com as Roupas</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>REDES SOCIAIS</h4>
-                        <ul>
-                            <li><a href="https://www.instagram.com/usevaleriano?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                            <li><a href="#facebook">Facebook</a></li>
-                            <li><a href="#twitter">Twitter</a></li>
-                            <li><a href="#youtube">YouTube</a></li>
-                        </ul>
-                    </div>
+                    <a href="#catalogo">Catálogo</a>
+                    <a href="#sobre">Sobre</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -235,6 +201,13 @@
                 });
             });
 
+            // Mapeamento de cores para imagens (Casaco com Capuz)
+            const colorImages = {
+                'preto': 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'verde-musgo': 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'branco': 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            };
+
             // Color selection
             document.querySelectorAll('.color-swatch').forEach(swatch => {
                 swatch.addEventListener('click', function() {
@@ -249,6 +222,13 @@
                     const selectedColorSpan = document.querySelector('.selected-color');
                     if (selectedColorSpan) {
                         selectedColorSpan.textContent = colorName.charAt(0).toUpperCase() + colorName.slice(1);
+                    }
+                    
+                    // Atualizar imagem do produto baseado na cor selecionada
+                    const mainImage = document.querySelector('.main-image img');
+                    if (mainImage && colorImages[colorName]) {
+                        mainImage.src = colorImages[colorName];
+                        mainImage.alt = `Casaco com Capuz ${colorName.charAt(0).toUpperCase() + colorName.slice(1)}`;
                     }
                     
                     console.log('Cor selecionada:', colorName);
